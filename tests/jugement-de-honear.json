@@ -2874,6 +2874,26 @@
     "artiste"
    ],
    "verdict": "juste"
+  },
+  {
+   "texte": "oui oui oui oui oui oui oui oui images",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "faux"
   }
  ]
 }

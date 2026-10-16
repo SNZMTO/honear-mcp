@@ -44,8 +44,9 @@ def _enchainements(parties: Sequence[Partie]) -> list[list[Partie]]:
 
 def _suites_de_mots(texte: str) -> list[str]:
     """Chaque suite de mots qui se suivent : « Kofs Jul » donne « kofs », « kofs jul » et « jul » ; un morceau trop court ne
-    compte que s'il est toute la saisie."""
-    mots = [m for m in normaliser(texte, articles=False).split(" ") if m]
+    compte que s'il est toute la saisie. Seuls les premiers mots se découpent (`JUGEMENT.mots_au_plus`) : sans borne, une saisie
+    de cent « & » ferait juger des milliers de suites, et figerait le serveur."""
+    mots = [m for m in normaliser(texte, articles=False).split(" ") if m][: JUGEMENT.mots_au_plus]
     return [
         " ".join(mots[debut:fin])
         for debut in range(len(mots))

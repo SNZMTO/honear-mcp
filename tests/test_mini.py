@@ -10,6 +10,7 @@ from mcp.server.apps import APP_MIME_TYPE, EXTENSION_ID
 from mcp.types import CallToolResult, TextResourceContents
 
 from honear_mcp.regles.liste import Liste, PisteDeLaListe, Surnoms
+from honear_mcp.regles.mini import PartieDuMini
 from honear_mcp.reseau.deezer import Deezer
 from honear_mcp.reseau.parties import Parties
 from honear_mcp.reseau.rangement import Rangement
@@ -137,3 +138,28 @@ async def test_un_appel_qui_ne_dit_pas_la_fenetre_ouvre_la_partie_avec_le_lien_e
     refus = await client.call_tool("mini_reveler", {"partie": str(sans["partie"])})
     assert refus.is_error
     assert T.reservee in refus.model_dump_json()
+
+
+def test_plein_le_mini_oublie_la_plus_vieille_partie_jamais_jouee_et_refuse_quand_toutes_ont_ete_jouees() -> None:
+    horloge = FausseHorloge()
+    parties = Parties(horloge)
+    partie = PartieDuMini(nom="Soirée", pistes=[])
+    ouvertes = []
+    for _ in range(MINI.parties_au_plus):
+        ouvertes.append(parties.ouvrir(partie))
+        horloge.heure += 1
+    # Une partie qu'on joue garde sa place ; la plus vieille jamais jouée laisse la sienne à la nouvelle.
+    jouee = ouvertes[0]
+    assert jouee is not None
+    parties.garder(jouee, partie)
+    nouvelle = parties.ouvrir(partie)
+    assert nouvelle is not None
+    assert parties.en_cours == MINI.parties_au_plus
+    assert parties.lire(jouee) is not None
+    assert ouvertes[1] is not None
+    assert parties.lire(ouvertes[1]) is None
+    # Toutes jouées : on refuse, plutôt que de chasser une partie en cours.
+    for ouverte in [*ouvertes, nouvelle]:
+        if ouverte is not None and parties.lire(ouverte) is not None:
+            parties.garder(ouverte, partie)
+    assert parties.ouvrir(partie) is None

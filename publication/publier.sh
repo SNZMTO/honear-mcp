@@ -1,8 +1,9 @@
 #!/bin/sh
 # Publie un commit du dépôt privé (SNZMTO/honear-mcp-atelier) dans le dépôt public (SNZMTO/honear-mcp), d'un seul commit :
 # l'arbre de ce commit tel quel, sans son historique. Avant, il vérifie que ce commit est poussé et que sa CI est verte, puis
-# qu'aucun secret ne part : ni jeton, ni clé, ni l'adresse IP du VPS (qu'il lit dans ~/vps/LISEZMOI.md, sans jamais l'écrire
-# ni l'afficher), ni une adresse e-mail qu'on ne connaît pas. Sans --envoyer, il ne fait que vérifier.
+# qu'aucun secret ne part : ni jeton, ni clé, ni fichier .env, ni l'adresse IP du VPS (qu'il lit dans ~/vps/LISEZMOI.md, sans
+# jamais l'écrire ni l'afficher), ni une adresse e-mail qu'on ne connaît pas ; et gitleaks, s'il est installé. C'est un filet :
+# des motifs connus, pas une garantie. Sans --envoyer, il ne fait que vérifier.
 #
 #   sh publication/publier.sh [commit] [--envoyer]
 #   sh publication/publier.sh --verifier <dossier>       (les mêmes vérifications, sur un dossier quelconque)
@@ -12,8 +13,11 @@ PUBLIC=SNZMTO/honear-mcp
 PRIVE=SNZMTO/honear-mcp-atelier
 git() { command git -C "$RACINE" "$@"; }
 
-# Ce qui ne part jamais : un jeton GitHub, une clé privée, une clé des statistiques écrite en clair, une clé AWS ou Slack.
-SECRETS='gh[pousr]_[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY|STATISTIQUES_CLE=[A-Za-z0-9_-]{8,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]+'
+# Ce qui ne part jamais : un jeton GitHub (classique ou fin), une clé privée, une clé des statistiques écrite en clair (entre
+# guillemets ou pas), une clé d'API (Anthropic, OpenAI, Stripe, Google, AWS, Slack), un jeton porteur écrit en clair.
+SECRETS='gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY|STATISTIQUES_CLE=["'"'"']?[A-Za-z0-9_-]{8,}'
+SECRETS="$SECRETS"'|sk-[A-Za-z0-9_-]{20,}|sk_(live|test)_[A-Za-z0-9]{16,}|AIza[0-9A-Za-z_-]{35}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]+'
+SECRETS="$SECRETS"'|Bearer [A-Za-z0-9._~+/=-]{20,}'
 # Les seules adresses e-mail qu'un fichier peut porter.
 ADRESSES_CONNUES='users\.noreply\.github\.com|noreply@anthropic\.com|contact@mateosan\.fr|bonjour@honear\.fr'
 
@@ -27,7 +31,7 @@ verifier() {
     fi
   done
   # Les fausses clés des tests s'appellent « faussecle-… » : elles peuvent partir.
-  secrets="$(grep -rnoE -- "$SECRETS" "$dossier" | grep -v 'STATISTIQUES_CLE=faussecle-' | cut -d: -f1 | sort -u || true)"
+  secrets="$(grep -rnoE -- "$SECRETS" "$dossier" | grep -v 'faussecle-' | cut -d: -f1 | sort -u || true)"
   if [ -n "$secrets" ]; then
     echo "Un secret est dans : $(echo "$secrets" | sed "s#^$dossier/##" | tr '\n' ' ')"
     echec=1
@@ -37,9 +41,13 @@ verifier() {
     echo "Des adresses e-mail inconnues : $(echo "$inconnues" | tr '\n' ' ')"
     echec=1
   fi
-  for fichier in .env statistiques.env; do
-    [ -z "$(find "$dossier" -name "$fichier" -print -quit)" ] || { echo "Un fichier $fichier part."; echec=1; }
-  done
+  envs="$(find "$dossier" \( -name '.env' -o -name '*.env' -o -name '*.env.*' \) -print | sed "s#^$dossier/##" | tr '\n' ' ')"
+  [ -z "$envs" ] || { echo "Un fichier .env part : $envs"; echec=1; }
+  if command -v gitleaks >/dev/null 2>&1; then
+    gitleaks dir "$dossier" --no-banner --redact >/dev/null 2>&1 || { echo "gitleaks voit un secret (gitleaks dir pour le détail)."; echec=1; }
+  else
+    echo "(gitleaks n'est pas installé : seuls les motifs ci-dessus ont été cherchés.)"
+  fi
   return "$echec"
 }
 
@@ -73,9 +81,10 @@ find "$TRAVAIL/public" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 cp -a "$TRAVAIL/arbre/." "$TRAVAIL/public/"
 command git -C "$TRAVAIL/public" add -A
 command git -C "$TRAVAIL/public" -c user.name="Mateo Sanchez" -c user.email="221996800+SNZMTO@users.noreply.github.com" commit -q -F - <<MESSAGE
-Le MCP de Honear, tel qu'au commit $COURT de son atelier, le $(date -u +%d/%m/%Y)
+Le MCP de Honear, publié le $(date -u +%d/%m/%Y)
 
-Publié d'un bloc depuis le dépôt privé où le travail se fait (voir « L'historique », dans le README).
+Publié d'un bloc depuis le dépôt privé où le travail se fait, par petits commits (voir « L'historique », dans le README) : son
+commit $COURT.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 MESSAGE

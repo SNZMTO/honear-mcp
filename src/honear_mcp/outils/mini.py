@@ -15,6 +15,7 @@ from pydantic import Field, StringConstraints
 
 from honear_mcp.outils.mini_blind_test import Jugee, MiniBlindTest, PartiePrete, PisteAEcouter, Revelee
 from honear_mcp.regles.titres import TitreCherche
+from honear_mcp.ressources.honear import JUGEMENT
 from honear_mcp.ressources.reglages import TITRES
 from honear_mcp.ressources.reglages_du_mini import MINI
 from honear_mcp.ressources.textes_du_mini import TEXTES_DU_MINI as T
@@ -60,7 +61,7 @@ def ajouter_le_mini(apps: Apps, mini: MiniBlindTest, page: str) -> None:
         description=T.repondre.description,
     )
     async def mini_repondre(
-        partie: str, saisie: Annotated[str, StringConstraints(max_length=TITRES.longueur_au_plus)], ctx: Context
+        partie: str, saisie: Annotated[str, StringConstraints(max_length=JUGEMENT.saisie_au_plus)], ctx: Context
     ) -> Jugee:
         return mini.repondre(partie, saisie, ctx)
 

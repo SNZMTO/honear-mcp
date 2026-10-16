@@ -33,7 +33,8 @@ npm ci --prefix interface && npm run --prefix interface construire   # le script
 - Un réglage (une durée, une borne, un quota) se lit dans `ressources/reglages.py` ; un texte montré aux gens ou à leur
   modèle, dans `ressources/textes.py`. Ceux de l'assistant d'exploitation sont à part (`…_d_exploitation.py`) : le serveur
   public n'en lit rien. Les ressources sont des données, jamais du code.
-- L'heure et l'attente ne se lisent que dans `reseau/horloge.py`. Rien ne tire au sort.
+- L'heure et l'attente ne se lisent que dans `reseau/horloge.py` ; le hasard (des identifiants, l'ordre d'une partie), que dans
+  `reseau/hasard.py`, et jamais par le module `random`.
 - Ni `Any`, ni `cast`, ni vérification coupée, ni `print`. Chaque module commence par une docstring, et tient en 200 lignes.
 - Les tests passent par un vrai client MCP (en mémoire) contre le faux Deezer (`tests/faux_deezer.py`) : jamais le vrai réseau.
 - `ressources/honear.py` et `tests/jugement-de-honear.json` sont écrits par Honear (`npm run exporter-pour-le-mcp -- ~/honear-mcp`,

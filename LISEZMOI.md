@@ -188,8 +188,9 @@ Et en construisant le mini blind test :
 - **Le jugement est celui de Honear**, porté et vérifié contre sa table : un point par partie trouvée (l'artiste, le titre),
   avec les surnoms d'une liste. Les titres d'une partie de thème sont cherchés chez Deezer ; ceux qu'il n'a pas, ou sans
   extrait, sont passés.
-- **Une partie vit en mémoire**, sous un identifiant tiré par `secrets`, une heure après son dernier geste, 200 au plus :
-  le protocole n'a plus de session, c'est cet identifiant, passé à chaque outil, qui la tient. Une liste se joue dans son ordre
+- **Une partie vit en mémoire**, sous un identifiant tiré par `secrets`, une heure après son dernier geste, 200 au plus ;
+  plein, le serveur oublie la plus vieille partie jamais jouée (un script qui en ouvre en boucle ne chasse que celles-là), et
+  ne refuse que si toutes ont été jouées. Le protocole n'a plus de session, c'est cet identifiant, passé à chaque outil, qui la tient. Une liste se joue dans son ordre
   si sa difficulté monte ; sinon, et pour un thème, dans un ordre tiré au hasard.
 - **L'extrait se relit avant d'être servi** : celui qu'on a vu sert s'il n'expire pas dans les deux minutes, sinon sa fiche
   (`/track/{id}`) est relue chez Deezer, sans le cache.
@@ -231,13 +232,20 @@ Et après le premier essai dans claude.ai :
   savoir montrer de fenêtre, alors que claude.ai la montre. Son message ajoute le lien de honear.fr pour un client qui ne la
   montrerait vraiment pas. Les outils de la fenêtre, eux, demandent toujours un client qui la déclare : le modèle n'y joue pas.
 - **Un rangement plein fait de la place** au lieu de refuser : il oublie la plus vieille liste que personne n'a jouée. Un
-  script qui en crée en boucle n'efface que des listes jamais jouées, et ne bloque personne pendant trente jours.
+  script qui en crée en boucle n'efface que des listes jamais jouées, et ne bloque personne pendant trente jours. Le rangement
+  sait, sans relire les listes, jusqu'à quand chacune vit : il relisait les 2 000 fichiers à chaque création.
+- **Une saisie ne fige plus le serveur** (le 16) : comme dans Honear, seuls les premiers mots d'une saisie se découpent
+  (`JUGEMENT.mots_au_plus`), la fenêtre refuse une saisie plus longue que celle du jeu (`saisie_au_plus`), deux longueurs trop
+  éloignées ne comptent plus leurs fautes (`_fautes_au_plus`, sans changer aucun verdict), et un texte ne se normalise qu'une
+  fois (`TEXTES_JUGES_EN_MEMOIRE`). Deux cent caractères piégés coûtaient près de dix secondes ; la pire saisie, quelques
+  dizaines de millisecondes.
 
 Et en préparant la vitrine :
 
 - **Le dépôt public reçoit le projet d'un bloc** : `publication/publier.sh` prend l'arbre d'un commit poussé dont la CI est
-  verte, vérifie qu'il ne porte ni jeton, ni clé, ni l'adresse IP du VPS (lue dans `~/vps/LISEZMOI.md`, jamais écrite), ni une
-  adresse e-mail inconnue, puis le pose en un seul commit sur le dépôt public. Sans `--envoyer`, il ne fait que vérifier. Les
+  verte, vérifie qu'il ne porte ni jeton (classique ou fin), ni clé (privée, d'API), ni jeton porteur, ni fichier `.env`, ni
+  l'adresse IP du VPS (lue dans `~/vps/LISEZMOI.md`, jamais écrite), ni une adresse e-mail inconnue, et passe gitleaks s'il
+  est installé, puis le pose en un seul commit sur le dépôt public. Sans `--envoyer`, il ne fait que vérifier. Les
   fausses clés des tests s'appellent « faussecle-… » pour qu'il les reconnaisse.
 - **Les captures de la fenêtre** viennent d'un vrai navigateur (Chromium, dans le conteneur Playwright du VPS), avec un hôte
   d'essai fait de l'`AppBridge` d'`@modelcontextprotocol/ext-apps`, converties en WebP de 1600 pixels de large.

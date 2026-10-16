@@ -8,9 +8,11 @@ Les expressions sont celles du jeu, en ASCII comme en JavaScript : après la nor
 
 import re
 import unicodedata
+from functools import lru_cache
 from typing import Literal
 
 from honear_mcp.ressources.honear import JUGEMENT
+from honear_mcp.ressources.reglages import TEXTES_JUGES_EN_MEMOIRE
 
 type Verdict = Literal["juste", "presque", "faux"]
 
@@ -21,6 +23,7 @@ _FEAT = re.compile(r"\b(feat|ft|featuring)\b.*$", re.ASCII)
 _AUTRE_QUE_LETTRES = re.compile(r"[^a-z0-9]+")
 
 
+@lru_cache(maxsize=TEXTES_JUGES_EN_MEMOIRE)
 def normaliser(texte: str, *, articles: bool = True) -> str:
     """Ce qui reste d'une saisie quand on ne garde que ce qui compte : des lettres et des chiffres sans accents, des mots séparés
     d'une espace ; sans les petits mots du début (« Démons de minuit » pour « Les Démons de minuit »), sauf si `articles` est
@@ -68,6 +71,7 @@ _A_L_OREILLE = [
 _FIN_MUETTE = re.compile(r"(..)[esx]$")
 
 
+@lru_cache(maxsize=TEXTES_JUGES_EN_MEMOIRE)
 def a_l_oreille(texte: str) -> str:
     """Ce qu'on entend d'un texte déjà normalisé : les lettres qui se disent pareil ramenées à une seule (ph et f, c dur et k…),
     le h muet ôté, les lettres doublées simplifiées, le e, le s et le x muets de la fin d'un mot oubliés."""
@@ -80,6 +84,12 @@ def a_l_oreille(texte: str) -> str:
     return " ".join(mots)
 
 
+def _fautes_au_plus(a: str, b: str, au_plus: float) -> float:
+    """Les fautes, quand elles peuvent compter : deux longueurs trop éloignées le disent d'avance, sans rien compter (le portage
+    de `fautesAuPlus`). Une faute change la longueur d'une lettre au plus : au-delà de `au_plus`, aucun verdict ne change."""
+    return au_plus + 1 if abs(len(a) - len(b)) > au_plus else fautes(a, b)
+
+
 def juger(saisie: str, attendu: str) -> Verdict:
     """Une saisie comparée à ce qu'on attend : juste, presque, ou faux."""
     s, t = normaliser(saisie), normaliser(attendu)
@@ -89,13 +99,15 @@ def juger(saisie: str, attendu: str) -> Verdict:
     def colle(x: str) -> str:
         return x.replace(" ", "")
 
-    pleins = colle(normaliser(saisie, articles=False)), colle(normaliser(attendu, articles=False))
-    n = min(fautes(s, t), fautes(colle(s), colle(t)), fautes(*pleins))
     lettres = len(colle(t))
+    au_plus = max(lettres // JUGEMENT.lettres_par_faute, lettres * JUGEMENT.presque)
+    pleins = colle(normaliser(saisie, articles=False)), colle(normaliser(attendu, articles=False))
+    n = min(_fautes_au_plus(s, t, au_plus), _fautes_au_plus(colle(s), colle(t), au_plus), _fautes_au_plus(*pleins, au_plus))
     if n <= lettres // JUGEMENT.lettres_par_faute:
         return "juste"
     os, ot = colle(a_l_oreille(s)), colle(a_l_oreille(t))
-    if fautes(os, ot) <= len(ot) // JUGEMENT.lettres_par_faute_a_l_oreille:
+    a_l_oreille_au_plus = len(ot) // JUGEMENT.lettres_par_faute_a_l_oreille
+    if _fautes_au_plus(os, ot, a_l_oreille_au_plus) <= a_l_oreille_au_plus:
         return "juste"
     if n <= lettres * JUGEMENT.presque:
         return "presque"
