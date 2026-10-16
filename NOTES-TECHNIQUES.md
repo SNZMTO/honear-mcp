@@ -26,8 +26,9 @@ est entre parenthèses). La recherche avancée (`artist:"…" track:"…"`) ne t
 « Daft Punk, One More Time » : la recherche en vrac la remplace, et c'est la comparaison des noms qui trie.
 
 - **Trouvé** : une piste a le nom et l'artiste cherchés, aux accents, à la ponctuation et à l'habillage près, ou l'un
-  contient l'autre (« Gims » et « GIMS », « Maître Gims »). C'est la règle de Honear (`laBonnePiste`) : ce que le MCP trouve,
-  Honear le retrouve. Parmi les versions, celle qui n'a pas de drapeau, la plus populaire (`rank`).
+  contient l'autre (« Gims » et « GIMS », « Maître Gims »). C'est la règle qu'avait Honear pour les playlists Spotify
+  (`laBonnePiste`), partie avec elles le 16 octobre 2026. Parmi les versions, celle qui n'a pas de drapeau, la plus populaire
+  (`rank`).
 - **Ambigu** : aucune piste ne l'est, mais certaines ressemblent assez au titre cherché (0,6 sur 1, artiste et titre ensemble,
   par `difflib`) : les 4 plus proches, à égalité la plus populaire d'abord. Le modèle choisit par l'identifiant Deezer.
 - **Introuvable** : rien ne ressemble assez.
