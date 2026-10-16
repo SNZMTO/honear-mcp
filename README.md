@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://mcp.honear.fr"><img src="https://img.shields.io/badge/en%20ligne-mcp.honear.fr-E2A72E?style=flat-square&labelColor=2A1E17" alt="En ligne sur mcp.honear.fr"></a>
-  <a href="https://github.com/SNZMTO/honear-mcp/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/SNZMTO/honear-mcp/tests.yml?branch=main&label=tests&style=flat-square&labelColor=2A1E17&color=1F3A33" alt="Tests"></a>
+  <a href="https://github.com/SNZMTO/honear-mcp/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/SNZMTO/honear-mcp/tests.yml?branch=main&label=tests&style=flat-square&labelColor=2A1E17" alt="Tests"></a>
   <img src="https://img.shields.io/badge/Python-3.13-734929?style=flat-square&labelColor=2A1E17" alt="Python 3.13">
   <img src="https://img.shields.io/badge/mypy-strict-734929?style=flat-square&labelColor=2A1E17" alt="mypy strict">
   <img src="https://img.shields.io/badge/MCP-2026--07--28%20%2B%20Apps-1E6E78?style=flat-square&labelColor=2A1E17" alt="MCP 2026-07-28 et MCP Apps">
@@ -86,6 +86,7 @@ Le serveur est découpé en couches, chacune ne lisant que celles du dessous : `
 outils MCP, minces) ← `serveurs` (l'assemblage). Le détail est dans [`LISEZMOI.md`](LISEZMOI.md), Deezer, les listes et le
 protocole dans [`NOTES-TECHNIQUES.md`](NOTES-TECHNIQUES.md), l'hébergement dans [`HEBERGEMENT.md`](HEBERGEMENT.md).
 
+- **Plus de 450 tests**, dont près de 400 saisies que le jeu a jugées lui-même ; mypy en strict et ruff, à chaque envoi.
 - **Des règles qui se vérifient seules** ([`tests/test_sources.py`](tests/test_sources.py)) : les imports vont vers le bas, chaque
   dépendance déclarée sert, l'heure et le hasard ne se lisent qu'à un endroit, aucun nombre de réglage ni aucun texte hors des
   ressources, ni `Any` ni `print`, des fichiers de 200 lignes au plus ; et le serveur public ne lit rien de l'assistant
@@ -93,12 +94,13 @@ protocole dans [`NOTES-TECHNIQUES.md`](NOTES-TECHNIQUES.md), l'hébergement dans
 - **Le chemin d'un vrai client** : les tests parlent au serveur par un client MCP, contre un faux Deezer qui rejoue des réponses
   enregistrées ; le réseau est coupé.
 - **Une seule vérité pour le jugement** : celui du jeu est porté en Python, et vérifié contre une table de saisies que Honear
-  juge et exporte lui-même ; la CI relance cet export sur le jeu à chaque envoi. La palette et les polices de la fenêtre viennent
+  juge et exporte lui-même ; la CI relance cet export sur la version du jeu que le MCP suit (épinglée), à chaque envoi. La palette et les polices de la fenêtre viennent
   du même export.
 - **Deezer partagé** : le jeu et le MCP sortent par la même adresse ; leurs deux budgets, vérifiés ensemble, laissent de la
   marge sous la limite de Deezer, avec une file bornée et des recherches gardées.
 - **En production** : une image Python figée à son empreinte, sans droits, en lecture seule, sans capacités ni port publié, une
-  limite par adresse, une page d'accueil sans script sous une CSP stricte, aucune adresse IP gardée, un registre RGPD
+  limite par adresse, une page d'accueil sans script sous une CSP stricte, aucune adresse IP écrite (elle ne reste qu'une
+  minute en mémoire, le temps de compter), un registre RGPD
   ([`RGPD.md`](RGPD.md)).
 - **Sans compte, et c'est voulu** : le serveur ne garde rien de personne, une liste se partage par un lien qui ne se devine
   pas, et ce qui le protège, ce sont ses bornes. Plein, il oublie la plus vieille liste que personne n'a jouée plutôt que de
@@ -120,8 +122,9 @@ HONEAR_MCP_LISTES=/tmp/listes uv run honear-mcp   # le serveur, sur http://127.0
 ## Comment je l'ai construit
 
 Ce serveur est mon projet : l'idée (une IA qui fait les playlists qu'aucun bac ne propose, sans IA payante), son périmètre, ses
-décisions, ses règles de code et sa sécurité. Pour écrire le code, je travaille avec un assistant de code, Claude Code, et les
-commits co-signés le montrent. Il écrit vite ; c'est moi qui pose le cadre, qui tranche et qui vérifie.
+décisions, ses règles de code et sa sécurité. Claude Code écrit l'essentiel du code et des tests ; moi, je conçois, je fixe les
+règles que les tests vérifient, je tranche (souvent sur ses recommandations, et c'est noté dans les décisions) et j'essaie
+chaque phase dans de vrais clients.
 
 - **Un cahier de lancement, puis un plan.** Avant la moindre ligne : les six décisions (le SDK, où vivent les listes, le quota de
   Deezer partagé, le jugement sans deux vérités, l'assistant d'exploitation, la liste exacte des outils), chacune avec son coût,
@@ -129,9 +132,10 @@ commits co-signés le montrent. Il écrit vite ; c'est moi qui pose le cadre, qu
 - **Une phase à la fois**, chacune finie par ses tests et un essai dans un vrai client : MCP Inspector contre le vrai Deezer, et
   un vrai navigateur pour la fenêtre, dans un hôte d'essai, puis claude.ai.
 - **Des consignes écrites** ([`CLAUDE.md`](CLAUDE.md)) : les commandes, la mise en ligne, et ce à quoi on ne touche jamais.
-- **L'historique.** Le travail se fait dans un dépôt privé, avec des commits ordinaires. Ce dépôt public reçoit le projet d'un
-  bloc à chaque publication ([`publication/publier.sh`](publication/publier.sh), qui vérifie avant qu'aucun secret ne part) :
-  d'où un historique fait de publications, pas de commits.
+- **L'historique.** Le travail se fait par petits commits, co-signés par Claude, dans un dépôt privé. Ce dépôt public en
+  reçoit l'arbre d'un bloc à chaque jalon ([`publication/publier.sh`](publication/publier.sh), qui refuse de publier si un
+  motif de secret, un fichier `.env`, l'adresse IP du VPS ou une adresse e-mail inconnue s'y trouve : un filet, pas une
+  garantie) : d'où un historique fait de publications, et non de commits.
 
 <br>
 

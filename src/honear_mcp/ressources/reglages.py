@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from honear_mcp.ressources.honear import PARTIE_DE_HONEAR
 
 UN_JOUR = 24 * 3600
+TEXTES_JUGES_EN_MEMOIRE = 4096  # Le jugement normalise chaque texte une fois : une saisie piégée coûte quatre fois moins.
 
 
 @dataclass(frozen=True)

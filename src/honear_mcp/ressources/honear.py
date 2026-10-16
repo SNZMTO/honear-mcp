@@ -15,6 +15,8 @@ class JugementDeHonear:
     presque: float
     morceau: float
     morceau_au_moins: int
+    mots_au_plus: int
+    saisie_au_plus: int
     articles: tuple[str, ...]
     liaisons: tuple[str, ...]
 
@@ -25,6 +27,8 @@ JUGEMENT = JugementDeHonear(
     presque=0.4,
     morceau=0.5,
     morceau_au_moins=3,
+    mots_au_plus=8,
+    saisie_au_plus=120,
     articles=("le", "la", "les", "l", "un", "une", "des", "the", "a", "an"),
     liaisons=("feat", "ft", "featuring", "avec", "x"),
 )

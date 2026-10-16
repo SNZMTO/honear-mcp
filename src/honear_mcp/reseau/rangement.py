@@ -2,9 +2,10 @@
 
 Une liste s'écrit dans un fichier à côté, vidé sur le disque, puis mis à sa place d'un coup (`Path.replace`) : un arrêt en plein
 milieu laisse l'ancienne version ou la nouvelle, jamais un mélange. Une liste dont le temps est passé est oubliée quand on la
-lit, et toutes celles-là quand on en crée une. Quand le rangement est plein, une nouvelle liste prend la place de la plus vieille
-que personne n'a jouée : un script qui en crée en boucle n'efface que des listes jamais jouées, et n'empêche personne d'en
-créer. Un identifiant n'est jamais qu'un nom de fichier : rien qui remonte d'un dossier.
+lit, et toutes celles-là quand on en crée une : le rangement sait, sans les relire, jusqu'à quand chacune vit ; il ne relit
+tout le dossier que si son compte ne tombe plus juste. Quand le rangement est plein, une nouvelle liste prend la place de la
+plus vieille que personne n'a jouée : un script qui en crée en boucle n'efface que des listes jamais jouées, et n'empêche
+personne d'en créer. Un identifiant n'est jamais qu'un nom de fichier : rien qui remonte d'un dossier.
 """
 
 import os
@@ -33,6 +34,8 @@ class Rangement:
         """Le rangement de `dossier`, qu'on crée s'il n'existe pas ; les dates se lisent sur `horloge`."""
         self._dossier = dossier
         self._horloge = horloge
+        self._connues: dict[str, tuple[bool, float]] | None = None
+        """Ce qu'on sait de chaque liste rangée, sans la relire : jouée ou pas, et jusqu'à quand elle vit."""
         dossier.mkdir(parents=True, exist_ok=True)
 
     def nombre(self) -> int:
@@ -42,10 +45,13 @@ class Rangement:
     def creer(self, nom: str, pistes: list[PisteDeLaListe], *, dans_l_ordre: bool) -> Liste:
         """Range une nouvelle liste sous un identifiant neuf, pour toute sa vie ; plein, le rangement oublie de quoi lui faire
         de la place."""
-        vivantes = self.oublier_les_vieilles()
-        de_trop = len(vivantes) + 1 - LISTES.listes_au_plus
-        for oubliee in sorted(vivantes, key=_a_oublier_d_abord)[: max(de_trop, 0)]:
-            (self._dossier / f"{oubliee.id}.json").unlink(missing_ok=True)
+        connues = self._ce_qu_on_sait()
+        maintenant = self._horloge.monde()
+        for passee in [i for i, (_, jusqua) in connues.items() if jusqua <= maintenant]:
+            self._oublier(passee)
+        de_trop = len(connues) + 1 - LISTES.listes_au_plus
+        for oubliee in sorted(connues, key=connues.__getitem__)[: max(de_trop, 0)]:
+            self._oublier(oubliee)
         liste = Liste(id=identifiant(), nom=nom, dans_l_ordre=dans_l_ordre, pistes=pistes, jusqua=self._fin_de_vie())
         self._ecrire(liste)
         return liste
@@ -60,7 +66,7 @@ class Rangement:
         except ValidationError:
             return None
         if liste.jusqua <= self._horloge.monde():
-            fichier.unlink(missing_ok=True)
+            self._oublier(liste.id)
             return None
         return liste
 
@@ -77,7 +83,21 @@ class Rangement:
         """Oublie les listes dont le temps est passé, et ce qu'une écriture interrompue a pu laisser ; rend celles qui vivent."""
         for fichier in self._dossier.glob(".*.tmp"):
             fichier.unlink(missing_ok=True)
-        return [liste for fichier in self._dossier.glob("*.json") if (liste := self.lire(fichier.stem)) is not None]
+        vivantes = [liste for fichier in self._dossier.glob("*.json") if (liste := self.lire(fichier.stem)) is not None]
+        self._connues = {liste.id: _a_oublier_d_abord(liste) for liste in vivantes}
+        return vivantes
+
+    def _ce_qu_on_sait(self) -> dict[str, tuple[bool, float]]:
+        """Ce qu'on sait de chaque liste : lu sur le disque la première fois, tenu à jour ensuite, et relu si le dossier compte
+        d'autres fichiers que ceux qu'on connaît (posés par une autre main, ou laissés par un arrêt)."""
+        if self._connues is None or len(self._connues) != self.nombre():
+            self.oublier_les_vieilles()
+        return self._connues if self._connues is not None else {}
+
+    def _oublier(self, id_de_liste: str) -> None:
+        (self._dossier / f"{id_de_liste}.json").unlink(missing_ok=True)
+        if self._connues is not None:
+            self._connues.pop(id_de_liste, None)
 
     def _fin_de_vie(self) -> float:
         return self._horloge.monde() + LISTES.vie
@@ -92,6 +112,8 @@ class Rangement:
             fichier.flush()
             os.fsync(fichier.fileno())
         provisoire.replace(self._dossier / f"{liste.id}.json")
+        if self._connues is not None:
+            self._connues[liste.id] = _a_oublier_d_abord(liste)
         dossier = os.open(self._dossier, os.O_RDONLY)
         try:
             os.fsync(dossier)

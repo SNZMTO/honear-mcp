@@ -19,6 +19,10 @@ Honear (le jeu) ──réseau interne « honear-listes »──▶ honear-mcp:87
 Le frontal (`~/vps/frontal`) a le bloc de mcp.honear.fr dans son Caddyfile, et rejoint le réseau `honear-mcp` : il ne passe que
 le port 8790, et ne compresse pas les réponses en flux de `/mcp`.
 
+Le serveur croit l'adresse que le frontal lui donne (`X-Forwarded-For`, `forwarded_allow_ips="*"`) : c'est sûr parce qu'aucun
+port n'est publié et que seul le frontal joint le 8790. Publier ce port laisserait n'importe qui se faire passer pour une autre
+adresse, et contourner la limite par adresse.
+
 ## Mettre en ligne
 
 Depuis ce dossier de travail, jamais dans `/srv/honear-mcp` (c'est le script qui le remplit) ; quand Mateo dit « deploy », et
