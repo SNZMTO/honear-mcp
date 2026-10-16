@@ -269,9 +269,8 @@ Et en écrivant l'assistant d'exploitation :
 
 - **Phase 3, la suite** : Honear lit déjà les listes (son commit 78ceed2, pas encore en ligne : le lien collé dans le bac, les
   surnoms dans le jugement, l'ordre gardé, 30 appels Deezer par 5 secondes). Il reste à dessiner l'anecdote sur l'écran de
-  l'hôte et les écrans du lien ouvert directement, par les planches. Sa recherche avancée, qui ne trouve plus rien, coûte un
-  appel pour rien à chaque titre d'une playlist Spotify. Il exportera pour le MCP ses cas de jugement, sa palette et ses
-  règles : la ressource `honear://regles` en naîtra.
+  l'hôte et les écrans du lien ouvert directement, par les planches. Il exportera pour le MCP ses cas de jugement, sa palette
+  et ses règles : la ressource `honear://regles` en naîtra.
 - **Phase 4, la suite** : le MCP est en ligne (le 16 octobre 2026), Honear lit ses listes, et claude.ai s'y branche en
   connecteur personnalisé, avec « No sign-in » (voir NOTES-TECHNIQUES, « Les journaux »). Reste l'essai des outils dans une
   conversation, par Mateo.

@@ -1,7 +1,7 @@
 """Ce qu'on lit dans le nom d'un titre : comment le comparer à un autre, ce qui n'est que son habillage, et ce qui le joue mal.
 
-Les règles de comparaison et d'habillage sont celles de Honear (`src/serveur/sources/deezer.ts`), qui retrouve de la même façon
-chez Deezer les titres d'une playlist Spotify : un titre que le MCP dit trouvé, Honear le retrouve aussi.
+Les règles de comparaison et d'habillage viennent de Honear, qui s'en servait pour retrouver chez Deezer les titres d'une playlist
+Spotify. Honear ne lit plus Spotify depuis le 16 octobre 2026 : elles ne vivent plus qu'ici.
 """
 
 import difflib
