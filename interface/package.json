@@ -1,0 +1,15 @@
+{
+  "name": "honear-mcp-interface",
+  "private": true,
+  "description": "La fenêtre du mini blind test du MCP de Honear (MCP Apps) : un seul script, sans framework.",
+  "type": "module",
+  "scripts": {
+    "types": "tsc --noEmit",
+    "construire": "tsc --noEmit && node construire.mjs"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/ext-apps": "2.0.3",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}

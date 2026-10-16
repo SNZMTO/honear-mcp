@@ -1,0 +1,6 @@
+# Seul ce qui fait le serveur entre dans l'image.
+*
+!pyproject.toml
+!uv.lock
+!.python-version
+!src/

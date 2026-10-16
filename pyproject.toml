@@ -1,0 +1,70 @@
+# Le serveur MCP de Honear. Chaque dépendance dit pourquoi elle est là ; les versions exactes sont dans uv.lock.
+[project]
+name = "honear-mcp"
+version = "0.1.0"
+description = "Le serveur MCP de Honear : des playlists sur mesure, retrouvées chez Deezer, que le jeu sait jouer."
+authors = [{ name = "Mateo Sanchez", email = "221996800+SNZMTO@users.noreply.github.com" }]
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  # Le SDK officiel du protocole MCP : le serveur, ses outils, le transport HTTP, et un client en mémoire pour les tests.
+  "mcp==2.3.0",
+  # Le client HTTP que le SDK porte déjà : c'est lui qui appelle Deezer, pas un second client.
+  "httpx2==2.13.1",
+  # Ce qui entre et sort du serveur, validé à la frontière : les arguments des outils et les réponses de Deezer.
+  "pydantic==2.14.1",
+  # L'application web qui porte /mcp et /sante.
+  "starlette==1.8.0",
+  # Le serveur HTTP qui la sert.
+  "uvicorn==0.54.0",
+  # Les attentes et les verrous du réseau, sur la boucle que le SDK utilise.
+  "anyio==4.15.1",
+]
+
+[project.scripts]
+honear-mcp = "honear_mcp.serveurs.public:lancer"
+honear-exploitation = "honear_mcp.serveurs.exploitation:lancer"
+
+[dependency-groups]
+dev = [
+  # Le lint et le format.
+  "ruff==0.17.1",
+  # Les types, en strict.
+  "mypy==2.4.0",
+  # Les tests (anyio fournit leur boucle asynchrone).
+  "pytest==9.1.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 130
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "RUF", "PL", "PT", "ANN", "S", "T20", "DTZ", "PTH", "ERA", "FBT", "D1"]
+# Les textes sont en français : leurs apostrophes, leurs tirets et leurs espaces insécables sont voulus.
+allowed-confusables = ["’", "–", "—", " ", " "]
+# Une exception dit ce qui arrive (« DeezerIndisponible »), sans suffixe anglais ; un constructeur ou une méthode spéciale se
+# documente dans sa classe.
+ignore = ["N818", "D105", "D107"]
+
+[tool.ruff.lint.pylint]
+# Les arguments d'un outil MCP sont son mode d'emploi : ils restent à plat, comme le modèle les remplit.
+max-args = 8
+
+[tool.ruff.lint.per-file-ignores]
+# Dans les tests, assert est l'outil, les valeurs attendues s'écrivent en clair, et le nom d'un test dit ce qu'il vérifie.
+"tests/**" = ["S101", "PLR2004", "D1"]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+python_version = "3.13"
+warn_unreachable = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers", "-p", "no:cacheprovider"]

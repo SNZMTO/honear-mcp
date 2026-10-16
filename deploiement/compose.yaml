@@ -1,0 +1,40 @@
+# Le MCP de Honear en ligne, sur le VPS : un conteneur, qui n'ouvre aucun port. Le frontal du VPS (Caddy, dépôt « vps ») tient le
+# HTTPS de mcp.honear.fr et lui passe tout par le réseau « honear-mcp », à l'adresse « honear-mcp:8790 ». Le jeu (Honear) lit les
+# listes sur le réseau interne « honear-listes », à l'adresse « honear-mcp:8791 », que le frontal ne relaie pas. Le MCP ne sort
+# que vers Deezer. Il n'a aucun droit : pas de capacités, rien à gagner en route, un système de fichiers en lecture seule, de la
+# mémoire et des processus comptés.
+#
+# Posé dans /srv/honear-mcp par deploiement/mettre-en-ligne.sh, avec un .env à côté : VERSION (l'image, étiquetée à son commit),
+# UID_DU_MCP et GID_DU_MCP (l'utilisateur honear-mcp, à qui appartiennent les listes).
+
+name: honear-mcp
+
+services:
+  mcp:
+    image: honear-mcp:${VERSION:?}
+    restart: unless-stopped
+    user: '${UID_DU_MCP:?}:${GID_DU_MCP:?}'
+    # Les listes : le seul dossier où le MCP écrit.
+    volumes:
+      - /var/lib/honear-mcp/listes:/listes
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    mem_limit: 384m
+    stop_grace_period: 5s
+    networks:
+      honear-mcp:
+        aliases: [honear-mcp]
+      honear-listes:
+        aliases: [honear-mcp]
+
+# Le réseau du MCP, que le frontal rejoint ; celui des listes, que le jeu crée (deploiement/compose.yaml de Honear).
+networks:
+  honear-mcp:
+    name: honear-mcp
+  honear-listes:
+    name: honear-listes
+    external: true

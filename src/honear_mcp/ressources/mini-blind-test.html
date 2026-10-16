@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le mini blind test de Honear</title>
+<style>
+@font-face { font-family: "Caprasimo"; src: url("__SITE__/polices/caprasimo-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url("__SITE__/polices/barlow-condensed-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url("__SITE__/polices/barlow-condensed-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+:root {
+__COULEURS__
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--noyer); }
+body { color: var(--creme); font: 500 18px/1.35 "Barlow Condensed", system-ui, sans-serif; }
+#mini { max-width: 34rem; margin: 0 auto; padding: 18px 16px 20px; display: grid; gap: 14px; justify-items: center; text-align: center; }
+.titre { font: 400 26px/1.1 "Caprasimo", Georgia, serif; color: var(--miel); margin: 0; }
+.sous-titre { margin: 0; color: var(--kraft); letter-spacing: .04em; text-transform: uppercase; font-weight: 600; font-size: 15px; }
+.disque { width: 168px; height: 168px; border-radius: 50%; background: radial-gradient(circle, var(--vinyle) 0 58%, #0000 59%), repeating-radial-gradient(circle, var(--vinyle) 0 3px, var(--noyerSombre) 4px 5px); display: grid; place-items: center; box-shadow: 0 6px 18px #0006; }
+.disque.tourne { animation: tourne 1.8s linear infinite; }
+.etiquette { width: 74px; height: 74px; border-radius: 50%; background: var(--miel); display: grid; place-items: center; overflow: hidden; color: var(--expresso); font: 400 22px "Caprasimo", serif; }
+.etiquette img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes tourne { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .disque.tourne { animation: none; } }
+.chrono { width: 100%; height: 6px; border-radius: 3px; background: var(--noyerSombre); overflow: hidden; }
+.chrono > span { display: block; height: 100%; width: 0; background: var(--miel); }
+form { display: flex; gap: 8px; width: 100%; }
+input { flex: 1; min-width: 0; padding: 10px 12px; border: 0; border-radius: 6px; background: var(--creme); color: var(--expresso); font: inherit; }
+button { padding: 10px 16px; border: 0; border-radius: 6px; background: var(--miel); color: var(--expresso); font: 600 18px "Barlow Condensed", sans-serif; letter-spacing: .03em; cursor: pointer; }
+button.discret { background: transparent; color: var(--kraft); text-decoration: underline; padding: 4px 8px; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--bleuFane); outline-offset: 2px; }
+.verdict { min-height: 1.4em; margin: 0; font-weight: 600; }
+.verdict.juste { color: var(--miel); }
+.verdict.presque { color: var(--kraft); }
+.reponse { margin: 0; font: 400 22px/1.2 "Caprasimo", Georgia, serif; color: var(--creme); }
+.anecdote { margin: 0; color: var(--kraft); font-style: italic; max-width: 28rem; }
+.score { margin: 0; color: var(--miel); font-weight: 600; }
+.erreur { margin: 0; color: var(--creme); background: var(--rougeTomate); padding: 8px 12px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<main id="mini" aria-live="polite"></main>
+<script type="module">
+__SCRIPT__
+</script>
+</body>
+</html>
