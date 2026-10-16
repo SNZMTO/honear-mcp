@@ -1,0 +1,2879 @@
+{
+ "juger": [
+  {
+   "saisie": "bionsé",
+   "attendu": "Beyoncé",
+   "normalise": "bionse",
+   "a_l_oreille": "bions",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "angel",
+   "attendu": "Angèle",
+   "normalise": "angel",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "neckfeu",
+   "attendu": "Nekfeu",
+   "normalise": "neckfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nino",
+   "attendu": "Ninho",
+   "normalise": "nino",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dadjou",
+   "attendu": "Dadju",
+   "normalise": "dadjou",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ouejdene",
+   "attendu": "Wejdene",
+   "normalise": "ouejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stromai",
+   "attendu": "Stromae",
+   "normalise": "stromai",
+   "a_l_oreille": "strom",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johny halliday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johny halliday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "mikael jackson",
+   "attendu": "Michael Jackson",
+   "normalise": "mikael jackson",
+   "a_l_oreille": "mikael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernière dance",
+   "attendu": "Dernière danse",
+   "normalise": "derniere dance",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jull",
+   "attendu": "Jul",
+   "normalise": "jull",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jul",
+   "attendu": "SCH",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "damso",
+   "attendu": "Dadju",
+   "normalise": "damso",
+   "a_l_oreille": "damso",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "niska",
+   "attendu": "Ninho",
+   "normalise": "niska",
+   "a_l_oreille": "niska",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "muse",
+   "attendu": "Mika",
+   "normalise": "muse",
+   "a_l_oreille": "mus",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "les demons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "Démons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les demosn de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demosn de minuit",
+   "a_l_oreille": "demosn de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "LES DÉMONS DE MINUIT (version longue)",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "lesdemonsdeminuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "lesdemonsdeminuit",
+   "a_l_oreille": "lesdemonsdeminuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les demons du minou",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons du minou",
+   "a_l_oreille": "demon du minu",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "démons de minuit et demi",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit et demi",
+   "a_l_oreille": "demon de minuit et demi",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "les demons de",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de",
+   "a_l_oreille": "demon de",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "",
+   "attendu": "Les Démons de minuit",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "voyage voyage",
+   "attendu": "Les Démons de minuit",
+   "normalise": "voyage voyage",
+   "a_l_oreille": "voiaj voiaj",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "minuit",
+   "a_l_oreille": "minuit",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "demons",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons",
+   "a_l_oreille": "demon",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "imajes",
+   "attendu": "Images",
+   "normalise": "imajes",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "Images feat. personne",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyncé",
+   "attendu": "Beyoncé",
+   "normalise": "beynce",
+   "a_l_oreille": "bens",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyyoncé",
+   "attendu": "Beyoncé",
+   "normalise": "beyyonce",
+   "a_l_oreille": "beions",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyocné",
+   "attendu": "Beyoncé",
+   "normalise": "beyocne",
+   "a_l_oreille": "beokn",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "béyoncé",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyoncé",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyoncé",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les beyoncé",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "BEYONCÉ",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "beyoncé (live)",
+   "attendu": "Beyoncé",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Beyoncé",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Angèle",
+   "attendu": "Beyoncé",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "ngèle",
+   "attendu": "Angèle",
+   "normalise": "ngele",
+   "a_l_oreille": "njel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "angèèle",
+   "attendu": "Angèle",
+   "normalise": "angeele",
+   "a_l_oreille": "anjil",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "anègle",
+   "attendu": "Angèle",
+   "normalise": "anegle",
+   "a_l_oreille": "anegl",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "àngèlé",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "angèle",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "angèle",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les angèle",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ANGÈLE",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "angèle (live)",
+   "attendu": "Angèle",
+   "normalise": "angele",
+   "a_l_oreille": "anjel",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Angèle",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Nekfeu",
+   "attendu": "Angèle",
+   "normalise": "nekfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "nkfeu",
+   "attendu": "Nekfeu",
+   "normalise": "nkfeu",
+   "a_l_oreille": "nkfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "neekfeu",
+   "attendu": "Nekfeu",
+   "normalise": "neekfeu",
+   "a_l_oreille": "nikfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nekfue",
+   "attendu": "Nekfeu",
+   "normalise": "nekfue",
+   "a_l_oreille": "nekfu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nékfeu",
+   "attendu": "Nekfeu",
+   "normalise": "nekfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nequpheu",
+   "attendu": "Nekfeu",
+   "normalise": "nequpheu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nekfeou",
+   "attendu": "Nekfeu",
+   "normalise": "nekfeou",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les nekfeu",
+   "attendu": "Nekfeu",
+   "normalise": "nekfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "NEKFEU",
+   "attendu": "Nekfeu",
+   "normalise": "nekfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nekfeu (live)",
+   "attendu": "Nekfeu",
+   "normalise": "nekfeu",
+   "a_l_oreille": "nekfeu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Nekfeu",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Ninho",
+   "attendu": "Nekfeu",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "nino",
+   "attendu": "Ninho",
+   "normalise": "nino",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ninhoo",
+   "attendu": "Ninho",
+   "normalise": "ninhoo",
+   "a_l_oreille": "ninu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nniho",
+   "attendu": "Ninho",
+   "normalise": "nniho",
+   "a_l_oreille": "nio",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ninho",
+   "attendu": "Ninho",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ninho",
+   "attendu": "Ninho",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "nynho",
+   "attendu": "Ninho",
+   "normalise": "nynho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les ninho",
+   "attendu": "Ninho",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "NINHO",
+   "attendu": "Ninho",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ninho (live)",
+   "attendu": "Ninho",
+   "normalise": "ninho",
+   "a_l_oreille": "nino",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Ninho",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Dadju",
+   "attendu": "Ninho",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "dadj",
+   "attendu": "Dadju",
+   "normalise": "dadj",
+   "a_l_oreille": "dadj",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dadjju",
+   "attendu": "Dadju",
+   "normalise": "dadjju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daduj",
+   "attendu": "Dadju",
+   "normalise": "daduj",
+   "a_l_oreille": "daduj",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dàdju",
+   "attendu": "Dadju",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dadju",
+   "attendu": "Dadju",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dadjou",
+   "attendu": "Dadju",
+   "normalise": "dadjou",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les dadju",
+   "attendu": "Dadju",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "DADJU",
+   "attendu": "Dadju",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dadju (live)",
+   "attendu": "Dadju",
+   "normalise": "dadju",
+   "a_l_oreille": "dadju",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Dadju",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Wejdene",
+   "attendu": "Dadju",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "wejene",
+   "attendu": "Wejdene",
+   "normalise": "wejene",
+   "a_l_oreille": "uejen",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "weejdene",
+   "attendu": "Wejdene",
+   "normalise": "weejdene",
+   "a_l_oreille": "uijden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "wejdene",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "wéjdene",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "wejdene",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "wejdene",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les wejdene",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "WEJDENE",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "wejdene (live)",
+   "attendu": "Wejdene",
+   "normalise": "wejdene",
+   "a_l_oreille": "uejden",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Wejdene",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Stromae",
+   "attendu": "Wejdene",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "strome",
+   "attendu": "Stromae",
+   "normalise": "strome",
+   "a_l_oreille": "strom",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "strommae",
+   "attendu": "Stromae",
+   "normalise": "strommae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stroame",
+   "attendu": "Stromae",
+   "normalise": "stroame",
+   "a_l_oreille": "stroam",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stromàé",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stromae",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stromae",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les stromae",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "STROMAE",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "stromae (live)",
+   "attendu": "Stromae",
+   "normalise": "stromae",
+   "a_l_oreille": "stroma",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Stromae",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Johnny Hallyday",
+   "attendu": "Stromae",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "jonny hallyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "jonny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johhnny hallyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johhnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny ahllyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny ahllyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny hàllyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny hallyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny hallyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les johnny hallyday",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "JOHNNY HALLYDAY",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny hallyday (live)",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny hallyday",
+   "a_l_oreille": "joni alid",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "johnny",
+   "attendu": "Johnny Hallyday",
+   "normalise": "johnny",
+   "a_l_oreille": "joni",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Michael Jackson",
+   "attendu": "Johnny Hallyday",
+   "normalise": "michael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "michael jacksn",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jacksn",
+   "a_l_oreille": "mi§ael jaksn",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michhael jackson",
+   "attendu": "Michael Jackson",
+   "normalise": "michhael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michael ajckson",
+   "attendu": "Michael Jackson",
+   "normalise": "michael ajckson",
+   "a_l_oreille": "mi§ael ajkson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michàél jackson",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michael jacquson",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jacquson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "mychael jackson",
+   "attendu": "Michael Jackson",
+   "normalise": "mychael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les michael jackson",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "MICHAEL JACKSON",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michael jackson (live)",
+   "attendu": "Michael Jackson",
+   "normalise": "michael jackson",
+   "a_l_oreille": "mi§ael jakson",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "michael",
+   "attendu": "Michael Jackson",
+   "normalise": "michael",
+   "a_l_oreille": "mi§ael",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Dernière danse",
+   "attendu": "Michael Jackson",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "dernière dans",
+   "attendu": "Dernière danse",
+   "normalise": "derniere dans",
+   "a_l_oreille": "dernier dan",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernière dansee",
+   "attendu": "Dernière danse",
+   "normalise": "derniere dansee",
+   "a_l_oreille": "dernier dansi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernièer danse",
+   "attendu": "Dernière danse",
+   "normalise": "dernieer danse",
+   "a_l_oreille": "dernir dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dérnière dànse",
+   "attendu": "Dernière danse",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernière danse",
+   "attendu": "Dernière danse",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernyère danse",
+   "attendu": "Dernière danse",
+   "normalise": "dernyere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les dernière danse",
+   "attendu": "Dernière danse",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "DERNIÈRE DANSE",
+   "attendu": "Dernière danse",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernière danse (live)",
+   "attendu": "Dernière danse",
+   "normalise": "derniere danse",
+   "a_l_oreille": "dernier dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dernière",
+   "attendu": "Dernière danse",
+   "normalise": "derniere",
+   "a_l_oreille": "dernier",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Jul",
+   "attendu": "Dernière danse",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "ul",
+   "attendu": "Jul",
+   "normalise": "ul",
+   "a_l_oreille": "ul",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "juul",
+   "attendu": "Jul",
+   "normalise": "juul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jul",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jul",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jul",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "joul",
+   "attendu": "Jul",
+   "normalise": "joul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les jul",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "JUL",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jul (live)",
+   "attendu": "Jul",
+   "normalise": "jul",
+   "a_l_oreille": "jul",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Jul",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "SCH",
+   "attendu": "Jul",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "sc",
+   "attendu": "SCH",
+   "normalise": "sc",
+   "a_l_oreille": "sk",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "ssch",
+   "attendu": "SCH",
+   "normalise": "ssch",
+   "a_l_oreille": "s§",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "shc",
+   "attendu": "SCH",
+   "normalise": "shc",
+   "a_l_oreille": "§k",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "sch",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sch",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sch",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les sch",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "SCH",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sch (live)",
+   "attendu": "SCH",
+   "normalise": "sch",
+   "a_l_oreille": "§",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "SCH",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Mika",
+   "attendu": "SCH",
+   "normalise": "mika",
+   "a_l_oreille": "mika",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "mik",
+   "attendu": "Mika",
+   "normalise": "mik",
+   "a_l_oreille": "mik",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "miika",
+   "attendu": "Mika",
+   "normalise": "miika",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "imka",
+   "attendu": "Mika",
+   "normalise": "imka",
+   "a_l_oreille": "imka",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "mikà",
+   "attendu": "Mika",
+   "normalise": "mika",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "miqua",
+   "attendu": "Mika",
+   "normalise": "miqua",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "myka",
+   "attendu": "Mika",
+   "normalise": "myka",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les mika",
+   "attendu": "Mika",
+   "normalise": "mika",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "MIKA",
+   "attendu": "Mika",
+   "normalise": "mika",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "mika (live)",
+   "attendu": "Mika",
+   "normalise": "mika",
+   "a_l_oreille": "mika",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Mika",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Les Démons de minuit",
+   "attendu": "Mika",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "les émons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "emons de minuit",
+   "a_l_oreille": "emon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les démonss de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demonss de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les édmons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "edmons de minuit",
+   "a_l_oreille": "edmon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "lés démons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les démons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les démons de mynouit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de mynouit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les les démons de minuit",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "LES DÉMONS DE MINUIT",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les démons de minuit (live)",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de minuit",
+   "a_l_oreille": "demon de minuit",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les démons de",
+   "attendu": "Les Démons de minuit",
+   "normalise": "demons de",
+   "a_l_oreille": "demon de",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Images",
+   "attendu": "Les Démons de minuit",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "iages",
+   "attendu": "Images",
+   "normalise": "iages",
+   "a_l_oreille": "iaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "immages",
+   "attendu": "Images",
+   "normalise": "immages",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "iamges",
+   "attendu": "Images",
+   "normalise": "iamges",
+   "a_l_oreille": "iamje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "imàgés",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "images",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ymages",
+   "attendu": "Images",
+   "normalise": "ymages",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les images",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "IMAGES",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "images (live)",
+   "attendu": "Images",
+   "normalise": "images",
+   "a_l_oreille": "imaje",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Images",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Tout oublier",
+   "attendu": "Images",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "toutoublier",
+   "attendu": "Tout oublier",
+   "normalise": "toutoublier",
+   "a_l_oreille": "tutublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout ouublier",
+   "attendu": "Tout oublier",
+   "normalise": "tout ouublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout obulier",
+   "attendu": "Tout oublier",
+   "normalise": "tout obulier",
+   "a_l_oreille": "tut obulier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout oubliér",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout oublier",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout oublyer",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublyer",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les tout oublier",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "TOUT OUBLIER",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout oublier (live)",
+   "attendu": "Tout oublier",
+   "normalise": "tout oublier",
+   "a_l_oreille": "tut ublier",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "tout",
+   "attendu": "Tout oublier",
+   "normalise": "tout",
+   "a_l_oreille": "tut",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Léo Ferré",
+   "attendu": "Tout oublier",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "léoferré",
+   "attendu": "Léo Ferré",
+   "normalise": "leoferre",
+   "a_l_oreille": "leofer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo  ferré",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léof erré",
+   "attendu": "Léo Ferré",
+   "normalise": "leof erre",
+   "a_l_oreille": "leof er",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo férré",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo pherré",
+   "attendu": "Léo Ferré",
+   "normalise": "leo pherre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo ferré",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les léo ferré",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "LÉO FERRÉ",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo ferré (live)",
+   "attendu": "Léo Ferré",
+   "normalise": "leo ferre",
+   "a_l_oreille": "leo fer",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "léo",
+   "attendu": "Léo Ferré",
+   "normalise": "leo",
+   "a_l_oreille": "leo",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Avec le temps",
+   "attendu": "Léo Ferré",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "avc le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avc le temps",
+   "a_l_oreille": "avk le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avecc le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avecc le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avec le etmps",
+   "attendu": "Avec le temps",
+   "normalise": "avec le etmps",
+   "a_l_oreille": "avek le etmp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "àvéc le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avec le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avec le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les avec le temps",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "AVEC LE TEMPS",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avec le temps (live)",
+   "attendu": "Avec le temps",
+   "normalise": "avec le temps",
+   "a_l_oreille": "avek le temp",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "avec le",
+   "attendu": "Avec le temps",
+   "normalise": "avec le",
+   "a_l_oreille": "avek le",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Kofs",
+   "attendu": "Avec le temps",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "kos",
+   "attendu": "Kofs",
+   "normalise": "kos",
+   "a_l_oreille": "ko",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "kkofs",
+   "attendu": "Kofs",
+   "normalise": "kkofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "kfos",
+   "attendu": "Kofs",
+   "normalise": "kfos",
+   "a_l_oreille": "kfo",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "kofs",
+   "attendu": "Kofs",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "quophs",
+   "attendu": "Kofs",
+   "normalise": "quophs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "kofs",
+   "attendu": "Kofs",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les kofs",
+   "attendu": "Kofs",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "KOFS",
+   "attendu": "Kofs",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "kofs (live)",
+   "attendu": "Kofs",
+   "normalise": "kofs",
+   "a_l_oreille": "kof",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Kofs",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Bande organisée",
+   "attendu": "Kofs",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "bande oganisée",
+   "attendu": "Bande organisée",
+   "normalise": "bande oganisee",
+   "a_l_oreille": "band oganisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande organiisée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organiisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande organsiée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organsiee",
+   "a_l_oreille": "band organsi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bàndé organisée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande organisée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande organysée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organysee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les bande organisée",
+   "attendu": "Bande organisée",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "BANDE ORGANISÉE",
+   "attendu": "Bande organisée",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande organisée (live)",
+   "attendu": "Bande organisée",
+   "normalise": "bande organisee",
+   "a_l_oreille": "band organisi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bande",
+   "attendu": "Bande organisée",
+   "normalise": "bande",
+   "a_l_oreille": "band",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "GIMS",
+   "attendu": "Bande organisée",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "ims",
+   "attendu": "GIMS",
+   "normalise": "ims",
+   "a_l_oreille": "im",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "giims",
+   "attendu": "GIMS",
+   "normalise": "giims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "igms",
+   "attendu": "GIMS",
+   "normalise": "igms",
+   "a_l_oreille": "igm",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "gims",
+   "attendu": "GIMS",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "gims",
+   "attendu": "GIMS",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "gyms",
+   "attendu": "GIMS",
+   "normalise": "gyms",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les gims",
+   "attendu": "GIMS",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "GIMS",
+   "attendu": "GIMS",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "gims (live)",
+   "attendu": "GIMS",
+   "normalise": "gims",
+   "a_l_oreille": "jim",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "GIMS",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Sapés comme jamais",
+   "attendu": "GIMS",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "sapés cmme jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes cmme jamais",
+   "a_l_oreille": "sape km jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés ccomme jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes ccomme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés comme jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sàpés commé jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés quomme jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes quomme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés comme jamays",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamays",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les sapés comme jamais",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "SAPÉS COMME JAMAIS",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés comme jamais (live)",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme jamais",
+   "a_l_oreille": "sape kom jame",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "sapés comme",
+   "attendu": "Sapés comme jamais",
+   "normalise": "sapes comme",
+   "a_l_oreille": "sape kom",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Daft Punk",
+   "attendu": "Sapés comme jamais",
+   "normalise": "daft punk",
+   "a_l_oreille": "daft punk",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "daft puk",
+   "attendu": "Daft Punk",
+   "normalise": "daft puk",
+   "a_l_oreille": "daft puk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daft punnk",
+   "attendu": "Daft Punk",
+   "normalise": "daft punnk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daft upnk",
+   "attendu": "Daft Punk",
+   "normalise": "daft upnk",
+   "a_l_oreille": "daft upnk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dàft punk",
+   "attendu": "Daft Punk",
+   "normalise": "daft punk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dapht punqu",
+   "attendu": "Daft Punk",
+   "normalise": "dapht punqu",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daft pounk",
+   "attendu": "Daft Punk",
+   "normalise": "daft pounk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les daft punk",
+   "attendu": "Daft Punk",
+   "normalise": "daft punk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "DAFT PUNK",
+   "attendu": "Daft Punk",
+   "normalise": "daft punk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daft punk (live)",
+   "attendu": "Daft Punk",
+   "normalise": "daft punk",
+   "a_l_oreille": "daft punk",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "daft",
+   "attendu": "Daft Punk",
+   "normalise": "daft",
+   "a_l_oreille": "daft",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Around the World",
+   "attendu": "Daft Punk",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "aound the world",
+   "attendu": "Around the World",
+   "normalise": "aound the world",
+   "a_l_oreille": "aund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around the worldd",
+   "attendu": "Around the World",
+   "normalise": "around the worldd",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around teh world",
+   "attendu": "Around the World",
+   "normalise": "around teh world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "àround thé world",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around the world",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around the world",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les around the world",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "AROUND THE WORLD",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around the world (live)",
+   "attendu": "Around the World",
+   "normalise": "around the world",
+   "a_l_oreille": "arund te uorld",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "around the",
+   "attendu": "Around the World",
+   "normalise": "around the",
+   "a_l_oreille": "arund te",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "-M-",
+   "attendu": "Around the World",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "-m",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-m--",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "m--",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-m-",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-m-",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-m-",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les -m-",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-M-",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "-m- (live)",
+   "attendu": "-M-",
+   "normalise": "m",
+   "a_l_oreille": "m",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "-M-",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Je dis aime",
+   "attendu": "-M-",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "je dis aie",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aie",
+   "a_l_oreille": "je di i",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dis aimee",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aimee",
+   "a_l_oreille": "je di emi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dis aime",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "jé dis àime",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dis aime",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dys aime",
+   "attendu": "Je dis aime",
+   "normalise": "je dys aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les je dis aime",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "JE DIS AIME",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dis aime (live)",
+   "attendu": "Je dis aime",
+   "normalise": "je dis aime",
+   "a_l_oreille": "je di em",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "je dis",
+   "attendu": "Je dis aime",
+   "normalise": "je dis",
+   "a_l_oreille": "je di",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Alors on danse",
+   "attendu": "Je dis aime",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "alors on dase",
+   "attendu": "Alors on danse",
+   "normalise": "alors on dase",
+   "a_l_oreille": "alor on das",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alorss on danse",
+   "attendu": "Alors on danse",
+   "normalise": "alorss on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alros on danse",
+   "attendu": "Alors on danse",
+   "normalise": "alros on danse",
+   "a_l_oreille": "alro on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "àlors on dansé",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alors on danse",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alors on danse",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les alors on danse",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "ALORS ON DANSE",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alors on danse (live)",
+   "attendu": "Alors on danse",
+   "normalise": "alors on danse",
+   "a_l_oreille": "alor on dans",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "alors on",
+   "attendu": "Alors on danse",
+   "normalise": "alors on",
+   "a_l_oreille": "alor on",
+   "verdict": "presque"
+  },
+  {
+   "saisie": "Bella",
+   "attendu": "Alors on danse",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "ella",
+   "attendu": "Bella",
+   "normalise": "ella",
+   "a_l_oreille": "ela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bellaa",
+   "attendu": "Bella",
+   "normalise": "bellaa",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bella",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "béllà",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bella",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bella",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les bella",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "BELLA",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "bella (live)",
+   "attendu": "Bella",
+   "normalise": "bella",
+   "a_l_oreille": "bela",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Bella",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "Diddy",
+   "attendu": "Bella",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "didd",
+   "attendu": "Diddy",
+   "normalise": "didd",
+   "a_l_oreille": "did",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "didddy",
+   "attendu": "Diddy",
+   "normalise": "didddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "diddy",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "diddy",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "diddy",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "dyddy",
+   "attendu": "Diddy",
+   "normalise": "dyddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les diddy",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "DIDDY",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "diddy (live)",
+   "attendu": "Diddy",
+   "normalise": "diddy",
+   "a_l_oreille": "didi",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "",
+   "attendu": "Diddy",
+   "normalise": "",
+   "a_l_oreille": "",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "I'll Be Missing You",
+   "attendu": "Diddy",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "faux"
+  },
+  {
+   "saisie": "i'll be issing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be issing you",
+   "a_l_oreille": "i l be ising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'lll be missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i lll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'll be missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'll bé missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'll be missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "y'll be missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "y ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "les i'll be missing you",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "I'LL BE MISSING YOU",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'll be missing you (live)",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing you",
+   "a_l_oreille": "i l be mising iu",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "i'll be missing",
+   "attendu": "I'll Be Missing You",
+   "normalise": "i ll be missing",
+   "a_l_oreille": "i l be mising",
+   "verdict": "juste"
+  },
+  {
+   "saisie": "Beyoncé",
+   "attendu": "I'll Be Missing You",
+   "normalise": "beyonce",
+   "a_l_oreille": "beons",
+   "verdict": "faux"
+  }
+ ],
+ "parties": [
+  {
+   "texte": "images",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "les démons de minuit",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [
+    "artiste"
+   ],
+   "trouve": [
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "Images - Les Démons de minuit",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "images",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [
+    "artiste"
+   ],
+   "trouve": [],
+   "verdict": "faux"
+  },
+  {
+   "texte": "les demons du minou",
+   "artiste": "Images",
+   "titre": "Les Démons de minuit",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "romeo elvis",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "Angèle feat. Roméo Elvis",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "angele ft romeo elvis",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "angele romeo elvis",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "tout oublier angele romeo elvis",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "titre",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "Roméo Elvis x Angèle - Tout oublier",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "titre",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "tout oublier",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [
+    "artiste",
+    "feat"
+   ],
+   "trouve": [
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "romeo elvi",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "romeo",
+   "artiste": "Angèle",
+   "titre": "Tout oublier",
+   "feat": "Roméo Elvis",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "avec le temps",
+   "artiste": "Léo Ferré",
+   "titre": "Avec le temps",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "léo ferré avec le temps",
+   "artiste": "Léo Ferré",
+   "titre": "Avec le temps",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "jul",
+   "artiste": "Kofs",
+   "titre": "Bande organisée",
+   "feat": "Soso Maness, Elams, Jul, SCH, Naps & 13 Organisé",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "SCH",
+   "artiste": "Kofs",
+   "titre": "Bande organisée",
+   "feat": "Soso Maness, Elams, Jul, SCH, Naps & 13 Organisé",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "kofs jul",
+   "artiste": "Kofs",
+   "titre": "Bande organisée",
+   "feat": "Soso Maness, Elams, Jul, SCH, Naps & 13 Organisé",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "bande organisée 13 organisé",
+   "artiste": "Kofs",
+   "titre": "Bande organisée",
+   "feat": "Soso Maness, Elams, Jul, SCH, Naps & 13 Organisé",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "titre",
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "gradur",
+   "artiste": "GIMS",
+   "titre": "Sapés comme jamais",
+   "feat": "Alonzo, Gradur, KeBlack & Awa Imani",
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "feat"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "daft punk around the world",
+   "artiste": "Daft Punk",
+   "titre": "Around the World",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste",
+    "titre"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "m pokora",
+   "artiste": "-M-",
+   "titre": "Je dis aime",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "m",
+   "artiste": "-M-",
+   "titre": "Je dis aime",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "on danse",
+   "artiste": "Stromae",
+   "titre": "Alors on danse",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "mathieu chedid",
+   "artiste": "-M-",
+   "titre": "Je dis aime",
+   "feat": null,
+   "surnoms": {
+    "artiste": [
+     "Matthieu Chedid"
+    ],
+    "titre": []
+   },
+   "deja": [],
+   "trouve": [
+    "artiste"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "matthieu chedid",
+   "artiste": "-M-",
+   "titre": "Je dis aime",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [],
+   "verdict": "presque"
+  },
+  {
+   "texte": "maître gims",
+   "artiste": "GIMS",
+   "titre": "Bella",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste"
+   ],
+   "verdict": "juste"
+  },
+  {
+   "texte": "puff daddy",
+   "artiste": "Diddy",
+   "titre": "I'll Be Missing You",
+   "feat": null,
+   "surnoms": null,
+   "deja": [],
+   "trouve": [
+    "artiste"
+   ],
+   "verdict": "juste"
+  }
+ ]
+}

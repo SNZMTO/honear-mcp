@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le MCP de Honear</title>
+<meta name="description" content="Des playlists de blind test sur mesure, faites par ton assistant et jouées sur honear.fr.">
+<style>
+:root { color-scheme: light dark; --fond: #f7f1e6; --texte: #2b1d12; --doux: #6b5643; --cadre: #e2d5bf; --lien: #8a4b12; }
+@media (prefers-color-scheme: dark) { :root { --fond: #1d1510; --texte: #f3e9d8; --doux: #c2ad93; --cadre: #3a2c20; --lien: #f0b562; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fond); color: var(--texte); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1rem 3rem; }
+h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .5rem; }
+h2 { font-size: 1.15rem; margin: 2.2rem 0 .6rem; }
+p, li { color: var(--texte); }
+.chapeau { color: var(--doux); font-size: 1.1rem; margin-top: 0; }
+a { color: var(--lien); }
+code { font: .92em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--cadre); padding: .1em .35em; border-radius: .3em; overflow-wrap: anywhere; }
+dl { margin: 0; }
+dt { font-weight: 600; margin-top: 1rem; }
+dd { margin: .25rem 0 0; }
+.essai { color: var(--doux); font-size: .9rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--cadre); color: var(--doux); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Le MCP de Honear</h1>
+<p class="chapeau">Des playlists de blind test qui n’existent nulle part, faites par ton assistant, jouées sur <a href="https://honear.fr">honear.fr</a>.</p>
+
+<p>« Des chansons avec une couleur dans le titre », « les génériques des dessins animés des années 90 », « les 30 ans de Léa, fan de Beyoncé et de variété » : demande-la à Claude, à ChatGPT ou à un autre assistant branché sur ce serveur. Ton assistant choisit les titres ; le serveur les retrouve chez Deezer, écarte ce qui se joue mal (pas d’extrait, une version live, un remix, un karaoké, un doublon), range du plus connu au moins connu, et te donne le lien de la partie.</p>
+
+<h2>L’ajouter</h2>
+<p>Son adresse : <code>https://mcp.honear.fr/mcp</code>. Sans compte, sans clé.</p>
+<dl>
+<dt>Claude (claude.ai, l’application)</dt>
+<dd>Paramètres, Connecteurs, « Ajouter un connecteur personnalisé » : un nom (Honear), l’adresse ci-dessus, et « No sign-in » (sans connexion) pour l’authentification. Sinon, claude.ai cherche une connexion que le serveur n’a pas, et répond « Couldn’t register… ».</dd>
+<dt>Claude Code</dt>
+<dd><code>claude mcp add --transport http honear https://mcp.honear.fr/mcp</code></dd>
+<dt>ChatGPT <span class="essai">(non essayé)</span></dt>
+<dd>Paramètres, Applications et connecteurs : un connecteur personnalisé, avec l’adresse ci-dessus.</dd>
+<dt>VS Code <span class="essai">(non essayé)</span></dt>
+<dd>La commande « MCP: Add Server », en HTTP, avec l’adresse ci-dessus.</dd>
+</dl>
+
+<h2>Ensuite</h2>
+<p>Demande une playlist, sur un thème ou pour une occasion. Ton assistant peut aussi relever les titres d’une capture d’écran, d’une liste collée ou de l’affiche d’un festival. Il te rend un lien : ouvre-le sur un écran que tout le monde voit, touche « On pose un disque ? » et fais ta pochette ; la liste t’attend dans le bac. Chacun joue ensuite sur son téléphone.</p>
+
+<h2>Ce que le serveur garde</h2>
+<p>Rien de toi : ni compte, ni e-mail, ni adresse IP. Les titres que ton assistant cherche restent une heure en mémoire, le temps de ne pas redemander à Deezer ce qu’on vient de savoir. Une liste enregistrée (son nom, ses titres, leurs surnoms et leurs anecdotes) vit trente jours après sa création ou sa dernière partie, puis s’efface (plus tôt si personne ne l’a jouée et que le serveur est plein) ; seul qui a son lien la voit. Le serveur n’appelle jamais d’intelligence artificielle : c’est ton assistant qui réfléchit.</p>
+
+<footer>
+<p>Honear et ce serveur ont le même éditeur : <a href="https://honear.fr/mentions-legales">mentions légales</a>, <a href="https://honear.fr/confidentialite">confidentialité</a>. Les extraits viennent de l’API de Deezer.</p>
+<p>© 2026 Mateo Sanchez, tous droits réservés.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+# Les vérifications du MCP de Honear, à chaque envoi sur GitHub : le lint, le format, les types, les tests ; ce que Honear lui
+# écrit, refait depuis son main ; et le script de la fenêtre du mini blind test, reconstruit.
+# Les actions sont épinglées à un commit, pas à une étiquette qui pourrait bouger.
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run ruff check
+      - run: uv run ruff format --check
+      - run: uv run mypy
+      - run: uv run pytest
+
+  # Ce que Honear écrit pour le MCP (ressources/honear.py, tests/jugement-de-honear.json) est-il toujours ce que dit son main ?
+  # On relance son export, et rien ne doit changer : sinon, le jeu a changé de jugement, et le portage est à revoir.
+  honear:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: SNZMTO/honear
+          path: honear
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: honear/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: honear
+      - run: npm run exporter-pour-le-mcp -- "$GITHUB_WORKSPACE"
+        working-directory: honear
+      - run: git diff --exit-code -- src/honear_mcp/ressources/honear.py src/honear_mcp/ressources/polices tests/jugement-de-honear.json
+
+  # Le script de la fenêtre du mini blind test (src/honear_mcp/ressources/mini-blind-test.js) est-il bien celui que donnent ses
+  # sources ? On vérifie ses types, on le reconstruit, et rien ne doit changer.
+  interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: interface
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: interface/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run construire
+      - run: git diff --exit-code -- ../src/honear_mcp/ressources/mini-blind-test.js
