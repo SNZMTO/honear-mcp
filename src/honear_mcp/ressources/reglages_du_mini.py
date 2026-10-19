@@ -17,6 +17,9 @@ class ReglagesDuMini:
     pistes_au_moins: int
     pistes_au_plus: int
     parties_au_plus: int
+    jugements_a_la_fois: int
+    """Combien de saisies se jugent à la fois, chacune dans son fil : une saisie piégée coûte encore une centaine de
+    millisecondes de calcul, qui ne doivent pas figer la boucle."""
     vie: float
     marge_de_l_extrait: float
     fenetre: str
@@ -33,6 +36,7 @@ MINI = ReglagesDuMini(
     pistes_au_moins=3,
     pistes_au_plus=10,
     parties_au_plus=200,
+    jugements_a_la_fois=4,
     vie=3600,
     marge_de_l_extrait=120,
     fenetre="ui://honear/mini-blind-test.html",

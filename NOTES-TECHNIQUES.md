@@ -130,7 +130,11 @@ partie) sont le portage de `src/regles/jugement.ts` et de `src/regles/modes/libr
 ce qu'on en entend, et le verdict du jeu ; pour chaque saisie libre, les parties trouvées. Pour refaire la table après un
 changement du jeu : `npm run exporter-pour-le-mcp -- ~/honear-mcp` dans Honear, puis les tests ici.
 
-Il sert déjà à `creer_liste`, qui oublie les surnoms que Honear accepte sans eux ; il servira au mini blind test.
+Il sert à `creer_liste`, qui oublie les surnoms que Honear accepte sans eux, et au mini blind test. Là, une saisie se juge
+dans un fil à part (`Parties.juger`, `MINI.jugements_a_la_fois` à la fois) : la pire trouvée coûte encore une centaine de
+millisecondes, que la boucle ne passe plus à attendre (le fil et la boucle se partagent le processeur par tranches de quelques
+millisecondes : le GIL de Python). Si la partie bouge pendant le calcul (une autre saisie, une révélation), la saisie se juge de nouveau sur la partie
+devenue : rien ne revient en arrière.
 
 ## Le mini blind test (MCP Apps)
 

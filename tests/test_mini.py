@@ -3,6 +3,7 @@ un client qui ne sait pas afficher de fenêtre."""
 
 from collections.abc import AsyncIterator
 
+import anyio
 import pytest
 from mcp import Client
 from mcp.client.extension import advertise
@@ -12,6 +13,7 @@ from mcp.types import CallToolResult, TextResourceContents
 from honear_mcp.regles.liste import Liste, PisteDeLaListe, Surnoms
 from honear_mcp.regles.mini import PartieDuMini
 from honear_mcp.reseau.deezer import Deezer
+from honear_mcp.reseau.horloge import HorlogeDuSysteme
 from honear_mcp.reseau.parties import Parties
 from honear_mcp.reseau.rangement import Rangement
 from honear_mcp.ressources.reglages_du_mini import MINI
@@ -26,6 +28,10 @@ STROMAE = {"artiste": "Stromae", "titre": "Alors on danse"}
 GIMS = {"artiste": "Gims", "titre": "Bella"}
 INCONNU = {"artiste": "Zqxwv Plughxyz", "titre": "Vwqzk Trlmpf"}
 PISTES = [(3135553, "One More Time", "Daft Punk"), (6297555, "Alors on danse", "Stromae"), (72717420, "Bella", "GIMS")]
+NEUVIEME = (
+    'Symphony No. 9 in D Minor, Op. 125 "Choral": IV. Presto - Allegro assai - Allegro assai vivace - Andante maestoso - Adagio '
+    "ma non troppo, ma divoto"
+)
 
 
 @pytest.fixture
@@ -138,6 +144,34 @@ async def test_un_appel_qui_ne_dit_pas_la_fenetre_ouvre_la_partie_avec_le_lien_e
     refus = await client.call_tool("mini_reveler", {"partie": str(sans["partie"])})
     assert refus.is_error
     assert T.reservee in refus.model_dump_json()
+
+
+@pytest.fixture
+def liste_au_long_titre(rangement: Rangement) -> Liste:
+    pistes = [PisteDeLaListe(deezer=d, titre=t, artiste=a, rang=1, surnoms=Surnoms(), anecdote="") for d, t, a in PISTES]
+    pistes[0] = pistes[0].model_copy(update={"artiste": "Ludwig van Beethoven", "titre": NEUVIEME})
+    return rangement.creer("Les longs titres", pistes, dans_l_ordre=True)
+
+
+async def test_les_pires_saisies_contre_un_long_titre_se_jugent_en_moins_de_deux_secondes(
+    fenetre: Client, liste_au_long_titre: Liste
+) -> None:
+    partie = contenu(await fenetre.call_tool("jouer_ici", {"liste": liste_au_long_titre.id}))["partie"]
+    for saisie in ("&" * 120, "& " * 60):
+        debut = HorlogeDuSysteme().maintenant()
+        jugee = contenu(await fenetre.call_tool("mini_repondre", {"partie": partie, "saisie": saisie}))
+        assert HorlogeDuSysteme().maintenant() - debut < 2
+        assert jugee["verdict"] == "faux"
+
+
+async def test_une_revelation_pendant_un_jugement_n_est_pas_effacee(fenetre: Client, liste_au_long_titre: Liste) -> None:
+    partie = contenu(await fenetre.call_tool("jouer_ici", {"liste": liste_au_long_titre.id}))["partie"]
+    async with anyio.create_task_group() as taches:
+        taches.start_soon(fenetre.call_tool, "mini_repondre", {"partie": partie, "saisie": "& " * 60})
+        # On révèle pendant que la saisie se juge dans son fil : le jugement, fini après, ne ramène pas la partie en arrière.
+        await anyio.sleep(0.02)
+        assert contenu(await fenetre.call_tool("mini_reveler", {"partie": partie}))["titre"] == NEUVIEME
+    assert contenu(await fenetre.call_tool("mini_piste", {"partie": partie}))["rang"] == 2
 
 
 def test_plein_le_mini_oublie_la_plus_vieille_partie_jamais_jouee_et_refuse_quand_toutes_ont_ete_jouees() -> None:

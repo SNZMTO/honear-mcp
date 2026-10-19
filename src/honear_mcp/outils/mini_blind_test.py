@@ -9,7 +9,7 @@ from mcp.server.mcpserver.exceptions import ToolError
 from pydantic import BaseModel
 
 from honear_mcp.regles.liste import Liste
-from honear_mcp.regles.mini import PartieDuMini, PisteDuMini, juger_la_saisie, reveler
+from honear_mcp.regles.mini import PartieDuMini, PisteDuMini, reveler
 from honear_mcp.regles.titres import TitreCherche
 from honear_mcp.reseau.deezer import Deezer, DeezerIndisponible
 from honear_mcp.reseau.hasard import melanger
@@ -108,9 +108,17 @@ class MiniBlindTest:
             raise ToolError(T.sans_extrait)
         return PisteAEcouter(rang=partie.rang + 1, total=len(partie.pistes), extrait=piste.preview)
 
-    def repondre(self, id_de_partie: str, saisie: str, ctx: Context) -> Jugee:
-        """Une saisie jugée sur la piste en cours, comme dans Honear."""
-        jugee, verdict = juger_la_saisie(self._en_cours(id_de_partie, ctx), saisie)
+    async def repondre(self, id_de_partie: str, saisie: str, ctx: Context) -> Jugee:
+        """Une saisie jugée sur la piste en cours, comme dans Honear, dans un fil à part (`Parties.juger`). Si la partie a
+        bougé pendant le calcul (une autre saisie, une révélation), on la juge de nouveau telle qu'elle est devenue : un geste
+        n'en efface jamais un autre."""
+        partie = self._en_cours(id_de_partie, ctx)
+        while True:
+            jugee, verdict = await self._parties.juger(partie, saisie)
+            devenue = self._en_cours(id_de_partie, ctx)
+            if devenue is partie:
+                break
+            partie = devenue
         self._parties.garder(id_de_partie, jugee)
         return Jugee(trouve=list(jugee.trouvees), verdict=verdict, points=jugee.points)
 
