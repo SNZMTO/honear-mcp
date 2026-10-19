@@ -19,7 +19,7 @@ n'appelle lui-même aucune IA.
   le modèle avant la révélation.
 - **Une seule vérité pour le jugement** : celui du jeu, porté en Python et vérifié contre une table que le jeu exporte lui-même.
 - **Une architecture qui se vérifie seule** : des couches et des règles de code tenues par un test, et un faux Deezer.
-- **En production, sobrement** : conteneur durci, aucune adresse IP gardée, un registre RGPD, Deezer partagé avec le jeu.
+- **En production, sobrement** : conteneur durci, aucune adresse IP écrite, un registre RGPD, Deezer partagé avec le jeu.
 
 **La part de Claude Code** : écrit avec Claude Code, phase après phase, dans le cadre que j'ai posé : le cahier de lancement, les
 six décisions, les règles du code, et chaque mise en ligne.
