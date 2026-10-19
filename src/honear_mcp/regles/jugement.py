@@ -4,6 +4,9 @@ Il tolère les accents, les majuscules, la ponctuation, les « feat. » et ce qu
 début, des fautes de frappe, et ce qui s'écrit autrement mais se dit pareil. Une seule vérité : ses réglages viennent de Honear
 (`ressources/honear.py`, que Honear écrit), et `tests/test_jugement.py` le juge contre une table que Honear a jugée lui-même.
 Les expressions sont celles du jeu, en ASCII comme en JavaScript : après la normalisation, il ne reste que a à z et 0 à 9.
+
+Un texte ne se normalise qu'une fois : les caches gardent en mémoire les derniers textes jugés (`TEXTES_JUGES_EN_MEMOIRE` au
+plus chacun), ce qu'on tape compris, jusqu'à ce que d'autres les chassent ou que le serveur redémarre (`RGPD.md` le dit).
 """
 
 import re

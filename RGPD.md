@@ -13,7 +13,8 @@ Le MCP de Honear se sert sans compte. Il ne demande ni nom, ni e-mail, ni rien d
 | Une session d'ancien client | le protocole 2025-11-25 | en mémoire, 5 minutes sans nouvelles au plus ; un identifiant tiré au hasard, rien d'autre, qui ne va pas au journal |
 | Une liste : son nom, ses pistes, leurs surnoms et leurs anecdotes | le modèle du client, par `creer_liste` | un fichier sur le serveur, 30 jours après sa création ou sa dernière partie, puis effacé (plus tôt si le serveur en garde déjà 2 000 et que personne ne l'a jouée) ; rien ne la relie à qui l'a créée |
 | Les choix de l'hôte entre des titres ambigus | la personne, par le formulaire de son client | le temps de l'appel ; seul le titre choisi entre dans la liste |
-| Une partie du mini blind test, et ce qu'on y tape | la fenêtre, dans la conversation | en mémoire, une heure après son dernier geste, puis oubliée |
+| Une partie du mini blind test, et ce qu'on y tape | la fenêtre, dans la conversation | en mémoire, une heure après son dernier geste, puis oubliée ; ce qu'on tape peut rester plus longtemps dans le cache du jugement (la ligne suivante) |
+| Les textes jugés : ce qu'on tape dans le mini blind test, les surnoms d'une liste, les noms des pistes | le jugement des saisies | en mémoire, dans les caches du jugement : 4 096 textes au plus chacun, les plus anciens chassés par les nouveaux, tous oubliés au redémarrage ; rien ne les relie à qui les a écrits |
 
 Le thème d'une playlist (« les 30 ans de Léa ») reste dans la conversation, chez le client : le serveur ne reçoit que des
 artistes et des titres.
@@ -27,6 +28,8 @@ L'assistant d'exploitation, pour l'éditeur seul, lit les statistiques de Honear
 que Honear les garde déjà (son propre registre). Il n'en garde rien : il les rend à qui les demande, dans sa conversation.
 
 Une partie du mini blind test vit en mémoire, une heure après son dernier geste : ses pistes, ce qu'on a trouvé, les points ;
-rien de qui joue. Ce qu'on tape s'y juge et s'oublie. Les extraits et les pochettes, la fenêtre les lit directement chez
-Deezer (sur dzcdn.net), qui reçoit donc l'adresse IP de qui joue, comme pour n'importe quelle page web ; et ses polices, chez le
-MCP, qui ne garde pas cette adresse.
+rien de qui joue. Ce qu'on tape s'y juge, et le jugement le garde, avec sa forme normalisée, dans ses caches en mémoire : 4 096
+textes au plus chacun, les plus anciens chassés par les nouveaux, tous oubliés au redémarrage. Ces caches tiennent le serveur
+debout face à une saisie piégée (un texte ne se normalise qu'une fois) ; ils ne savent pas d'où vient un texte. Les extraits et
+les pochettes, la fenêtre les lit directement chez Deezer (sur dzcdn.net), qui reçoit donc l'adresse IP de qui joue, comme pour
+n'importe quelle page web ; et ses polices, chez le MCP, qui ne garde pas cette adresse.
