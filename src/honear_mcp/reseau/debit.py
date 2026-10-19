@@ -35,7 +35,8 @@ class ParAdresse:
     """Tant de requêtes au plus par adresse, sur une fenêtre fixe qui part de sa première requête ; puis l'adresse est oubliée.
 
     On ne garde que l'adresse, son compte et l'heure de sa première requête, en mémoire, et tant d'adresses au plus : les plus
-    anciennes s'oublient d'abord.
+    anciennes s'oublient d'abord. Une fois par fenêtre au plus, la première requête venue fait oublier toutes les adresses dont
+    la fenêtre est passée : une adresse ne reste pas plus d'une fenêtre après la sienne, tant que des requêtes arrivent.
     """
 
     def __init__(self, par_fenetre: int, duree: float, au_plus: int, horloge: Horloge) -> None:
@@ -45,10 +46,14 @@ class ParAdresse:
         self._au_plus = au_plus
         self._horloge = horloge
         self._comptes: dict[str, tuple[float, int]] = {}
+        self._menage = horloge.maintenant()
+        """Quand on a oublié les adresses passées pour la dernière fois."""
 
     def attente(self, adresse: str) -> float:
         """Compte une requête de cette adresse : 0 si elle passe, sinon combien de secondes attendre avant la prochaine."""
         maintenant = self._horloge.maintenant()
+        if self._menage + self._duree <= maintenant:
+            self._oublier(maintenant)
         debut, compte = self._comptes.get(adresse, (maintenant, 0))
         if debut + self._duree <= maintenant:
             debut, compte = maintenant, 0
@@ -61,6 +66,7 @@ class ParAdresse:
         return 0
 
     def _oublier(self, maintenant: float) -> None:
+        self._menage = maintenant
         for passee in [a for a, (debut, _) in self._comptes.items() if debut + self._duree <= maintenant]:
             del self._comptes[passee]
         while len(self._comptes) > self._au_plus:
