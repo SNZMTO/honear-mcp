@@ -91,9 +91,10 @@ TEXTES = Textes(
             "Gims » vaut déjà « GIMS », « Puff Daddy » vaut déjà « Diddy »). L’anecdote est une phrase courte et vérifiable, "
             "montrée à la révélation ; rien d’inventé. « croissante » range du plus connu au moins connu et Honear joue la "
             "liste dans cet ordre ; « telle_quelle » la laisse mélanger. Une liste est oubliée {jours} jours après sa dernière "
-            "partie, ou plus tôt si le serveur est plein et que personne ne l’a jouée. Pour la jouer : ouvrir le lien sur un "
-            "écran que tout le monde voit, toucher « On pose un disque ? » et faire sa pochette ; la liste attend dans le bac, "
-            "il reste à toucher « Celle-là », et chacun rejoint la room avec son téléphone."
+            "partie ; plein, le serveur fait de la place : enregistrer une liste peut en effacer une autre, même d’une autre "
+            "conversation, d’abord la plus vieille que personne n’a jouée. Pour la jouer : ouvrir le lien sur un écran que tout "
+            "le monde voit, toucher « On pose un disque ? » et faire sa pochette ; la liste attend dans le bac, il reste à "
+            "toucher « Celle-là », et chacun rejoint la room avec son téléphone."
         ),
     ),
     une_liste=TexteDOutil(

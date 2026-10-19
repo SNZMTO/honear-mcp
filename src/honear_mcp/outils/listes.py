@@ -70,7 +70,8 @@ def ajouter_les_listes(serveur: MCPServer, deezer: Deezer, rangement: Rangement)
         description=TEXTES.creer_liste.description.format(
             au_moins=LISTES.pistes_au_moins, au_plus=LISTES.pistes_au_plus, jours=round(LISTES.vie / UN_JOUR)
         ),
-        annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=True),
+        # Destructeur : plein, le rangement fait de la place en effaçant une liste, peut-être celle de quelqu'un d'autre.
+        annotations=ToolAnnotations(read_only_hint=False, destructive_hint=True, idempotent_hint=False, open_world_hint=True),
     )
     async def creer_liste(
         nom: NomDeListe,
