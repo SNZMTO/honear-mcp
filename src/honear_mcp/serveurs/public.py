@@ -20,7 +20,9 @@ import uvicorn
 from mcp.server.apps import Apps
 from mcp.server.mcpserver import MCPServer
 from mcp.server.transport_security import TransportSecuritySettings
+from mcp.types.version import HANDSHAKE_PROTOCOL_VERSIONS
 from starlette.applications import Starlette
+from starlette.datastructures import Headers
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Mount, Route
@@ -62,8 +64,19 @@ def creer_le_serveur(deezer: Deezer, rangement: Rangement, parties: Parties) -> 
     return serveur
 
 
-def _par_adresse(app: ASGIApp, limite: ParAdresse) -> ASGIApp:
-    """Le MCP derrière la limite de chaque adresse : au-delà, une réponse 429 qui dit dans combien de secondes revenir.
+def _ouvre_une_session(scope: Scope) -> bool:
+    """Vrai pour une requête qui peut ouvrir une session : un POST sans session, de l'ancien protocole (sans version, ou d'une
+    version qui passe par `initialize`). On ne lit que ses en-têtes : le protocole 2026-07-28, qui n'a pas de session, et les
+    requêtes d'une session ouverte n'y comptent pas."""
+    entetes = Headers(scope=scope)
+    version_demandee = entetes.get("mcp-protocol-version")
+    ancienne = version_demandee is None or version_demandee in HANDSHAKE_PROTOCOL_VERSIONS
+    return scope["method"] == "POST" and "mcp-session-id" not in entetes and ancienne
+
+
+def _par_adresse(app: ASGIApp, limite: ParAdresse, sessions: ParAdresse) -> ASGIApp:
+    """Le MCP derrière les limites de chaque adresse, ses requêtes et les sessions qu'elle ouvre : au-delà, une réponse 429 qui
+    dit dans combien de secondes revenir.
 
     L'adresse est celle du client, que le frontal donne (uvicorn lit son en-tête X-Forwarded-For) ; elle ne sert qu'à compter.
     """
@@ -71,7 +84,12 @@ def _par_adresse(app: ASGIApp, limite: ParAdresse) -> ASGIApp:
     async def garde(scope: Scope, receive: Receive, send: Send) -> None:
         client = scope.get("client")
         if scope["type"] == "http" and client is not None:
-            attente = limite.attente(str(client[0]))
+            adresse = str(client[0])
+            attente = limite.attente(adresse)
+            if not _ouvre_une_session(scope):
+                sessions.menage()
+            elif attente == 0:
+                attente = sessions.attente(adresse)
             if attente > 0:
                 refus = Response(status_code=HTTPStatus.TOO_MANY_REQUESTS, headers={"Retry-After": str(math.ceil(attente))})
                 await refus(scope, receive, send)
@@ -84,9 +102,9 @@ def _par_adresse(app: ASGIApp, limite: ParAdresse) -> ASGIApp:
 def application(deezer: Deezer, rangement: Rangement, parties: Parties, horloge: Horloge) -> Starlette:
     """L'application web : la page d'accueil, `/sante`, puis le MCP pour tout le reste.
 
-    Le MCP ne répond qu'aux noms et aux pages qu'on lui nomme (contre le DNS rebinding), compte les requêtes de chaque adresse,
-    borne les sessions des anciens clients, et laisse une ligne au journal par requête, sans adresse (`journal.py`). Son
-    gestionnaire de sessions vit le temps de l'application : c'est elle qui le démarre.
+    Le MCP ne répond qu'aux noms et aux pages qu'on lui nomme (contre le DNS rebinding), compte les requêtes de chaque adresse
+    et les sessions qu'elle ouvre, borne les sessions des anciens clients, et laisse une ligne au journal par requête, sans
+    adresse (`journal.py`). Son gestionnaire de sessions vit le temps de l'application : c'est elle qui le démarre.
     """
     serveur = creer_le_serveur(deezer, rangement, parties)
     mcp = serveur.streamable_http_app(
@@ -106,11 +124,12 @@ def application(deezer: Deezer, rangement: Rangement, parties: Parties, horloge:
             yield
 
     limite = ParAdresse(SERVEUR.requetes_par_adresse, SERVEUR.fenetre_par_adresse, SERVEUR.adresses_au_plus, horloge)
+    sessions = ParAdresse(SERVEUR.sessions_par_adresse, SERVEUR.fenetre_des_sessions, SERVEUR.adresses_au_plus, horloge)
     routes = [
         page_d_accueil(),
         polices(),
         Route("/sante", sante, methods=["GET"]),
-        Mount("/", app=journaliser(_par_adresse(mcp, limite))),
+        Mount("/", app=journaliser(_par_adresse(mcp, limite, sessions))),
     ]
     return Starlette(routes=routes, lifespan=cycle)
 

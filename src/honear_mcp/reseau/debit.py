@@ -51,9 +51,8 @@ class ParAdresse:
 
     def attente(self, adresse: str) -> float:
         """Compte une requête de cette adresse : 0 si elle passe, sinon combien de secondes attendre avant la prochaine."""
+        self.menage()
         maintenant = self._horloge.maintenant()
-        if self._menage + self._duree <= maintenant:
-            self._oublier(maintenant)
         debut, compte = self._comptes.get(adresse, (maintenant, 0))
         if debut + self._duree <= maintenant:
             debut, compte = maintenant, 0
@@ -64,6 +63,13 @@ class ParAdresse:
         if len(self._comptes) > self._au_plus:
             self._oublier(maintenant)
         return 0
+
+    def menage(self) -> None:
+        """Oublie les adresses dont la fenêtre est passée, une fois par fenêtre au plus : à appeler aussi pour une requête qui ne
+        compte pas ici, pour que les adresses s'oublient même quand plus rien ne compte."""
+        maintenant = self._horloge.maintenant()
+        if self._menage + self._duree <= maintenant:
+            self._oublier(maintenant)
 
     def _oublier(self, maintenant: float) -> None:
         self._menage = maintenant
