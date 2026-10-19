@@ -114,6 +114,10 @@ class Rangement:
         provisoire.replace(self._dossier / f"{liste.id}.json")
         if self._connues is not None:
             self._connues[liste.id] = _a_oublier_d_abord(liste)
+        # Le dossier se vide aussi sur le disque, pour que le nouveau nom survive à un arrêt. Sous Windows, où ne tournent que les
+        # tests, un dossier ne s'ouvre pas comme un fichier (os.open lève PermissionError) : il n'a pas os.O_DIRECTORY.
+        if not hasattr(os, "O_DIRECTORY"):
+            return
         dossier = os.open(self._dossier, os.O_RDONLY)
         try:
             os.fsync(dossier)
