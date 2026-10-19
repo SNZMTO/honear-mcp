@@ -8,9 +8,9 @@ Le MCP de Honear se sert sans compte. Il ne demande ni nom, ni e-mail, ni rien d
 |---|---|---|
 | Des noms d'artistes et de titres | le modèle du client, par `chercher_titres` | en mémoire, une heure (le cache des recherches), puis oublié ; jamais écrit sur disque |
 | La recherche envoyée à Deezer | le serveur, vers l'API publique de Deezer | chez Deezer, selon ses règles ; elle part de l'adresse du serveur, pas de celle du client |
-| L'adresse IP d'un client | la connexion, par le frontal | en mémoire, une minute, pour compter ses requêtes (120 au plus) ; jamais écrite : le journal du MCP ne la lit pas |
+| L'adresse IP d'un client | la connexion, par le frontal | en mémoire, pour compter ses requêtes sur une minute (120 au plus), et sur dix les sessions qu'elle ouvre à l'ancien protocole (5 au plus) ; puis oubliée au ménage suivant, fait une fois par fenêtre à la première requête venue ; jamais écrite : le journal du MCP ne la lit pas |
 | Ce que fait un client : la méthode demandée, l'outil appelé, le code de la réponse, son logiciel et ce qu'il dit savoir faire | chaque requête au MCP | le journal du conteneur, que journald fait tourner ; ni adresse ni contenu |
-| Une session d'ancien client | le protocole 2025-11-25 | en mémoire, 30 minutes sans nouvelles au plus ; un identifiant tiré au hasard, rien d'autre |
+| Une session d'ancien client | le protocole 2025-11-25 | en mémoire, 5 minutes sans nouvelles au plus ; un identifiant tiré au hasard, rien d'autre, qui ne va pas au journal |
 | Une liste : son nom, ses pistes, leurs surnoms et leurs anecdotes | le modèle du client, par `creer_liste` | un fichier sur le serveur, 30 jours après sa création ou sa dernière partie, puis effacé (plus tôt si le serveur en garde déjà 2 000 et que personne ne l'a jouée) ; rien ne la relie à qui l'a créée |
 | Les choix de l'hôte entre des titres ambigus | la personne, par le formulaire de son client | le temps de l'appel ; seul le titre choisi entre dans la liste |
 | Une partie du mini blind test, et ce qu'on y tape | la fenêtre, dans la conversation | en mémoire, une heure après son dernier geste, puis oubliée |

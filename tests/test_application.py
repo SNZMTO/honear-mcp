@@ -8,6 +8,7 @@ from importlib.metadata import version
 import httpx2
 import pytest
 from mcp import Client, MCPError
+from starlette.applications import Starlette
 
 from honear_mcp.regles.liste import Liste, PisteDeLaListe, Surnoms
 from honear_mcp.reseau.deezer import Deezer
@@ -28,18 +29,34 @@ INITIALISATION = {
     "params": {"protocolVersion": "2025-11-25", "capabilities": {}, "clientInfo": {"name": "essai", "version": "0"}},
 }
 EN_TETES_MCP = {"Accept": "application/json, text/event-stream", "Content-Type": "application/json"}
+ENVELOPPE = {"protocolVersion": "2026-07-28", "clientInfo": {"name": "essai", "version": "0"}, "clientCapabilities": {}}
+DECOUVERTE = {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "server/discover",
+    "params": {"_meta": {f"io.modelcontextprotocol/{cle}": valeur for cle, valeur in ENVELOPPE.items()}},
+}
+"""Ce qu'envoie d'abord un client du protocole 2026-07-28 (claude.ai, dans une conversation) : sans session."""
+EN_TETES_DECOUVERTE = {**EN_TETES_MCP, "MCP-Protocol-Version": "2026-07-28", "Mcp-Method": "server/discover"}
 
 
 @pytest.fixture
-async def http(
-    deezer: Deezer, rangement: Rangement, parties: Parties, horloge: FausseHorloge
-) -> AsyncIterator[httpx2.AsyncClient]:
-    """Un client HTTP branché à l'application dans le même processus, son cycle de vie démarré."""
+async def app(deezer: Deezer, rangement: Rangement, parties: Parties, horloge: FausseHorloge) -> AsyncIterator[Starlette]:
+    """L'application, son cycle de vie démarré."""
     app = application(deezer, rangement, parties, horloge)
-    async with (
-        app.router.lifespan_context(app),
-        httpx2.AsyncClient(transport=httpx2.ASGITransport(app=app), base_url="http://127.0.0.1:8790") as client,
-    ):
+    async with app.router.lifespan_context(app):
+        yield app
+
+
+def depuis(app: Starlette, adresse: str) -> httpx2.AsyncClient:
+    """Un client HTTP branché à l'application dans le même processus, qui vient de cette adresse."""
+    return httpx2.AsyncClient(transport=httpx2.ASGITransport(app=app, client=(adresse, 123)), base_url="http://127.0.0.1:8790")
+
+
+@pytest.fixture
+async def http(app: Starlette) -> AsyncIterator[httpx2.AsyncClient]:
+    """Un client HTTP qui vient de la machine elle-même."""
+    async with depuis(app, "127.0.0.1") as client:
         yield client
 
 
@@ -146,13 +163,29 @@ async def test_la_page_d_accueil_se_lit_sans_script_sous_une_politique_stricte(h
 
 async def test_une_adresse_qui_insiste_trop_attend_son_tour(http: httpx2.AsyncClient, horloge: FausseHorloge) -> None:
     for _ in range(SERVEUR.requetes_par_adresse):
-        assert (await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)).status_code == 200
-    de_trop = await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)
+        assert (await http.post("/mcp", json=DECOUVERTE, headers=EN_TETES_DECOUVERTE)).status_code == 200
+    de_trop = await http.post("/mcp", json=DECOUVERTE, headers=EN_TETES_DECOUVERTE)
     assert de_trop.status_code == 429
     assert de_trop.headers["retry-after"] == str(round(SERVEUR.fenetre_par_adresse))
     # /sante et l'accueil ne comptent pas ; la fenêtre passée, l'adresse est oubliée.
     assert (await http.get("/sante")).status_code == 200
     horloge.heure += SERVEUR.fenetre_par_adresse
+    assert (await http.post("/mcp", json=DECOUVERTE, headers=EN_TETES_DECOUVERTE)).status_code == 200
+
+
+async def test_une_adresse_n_ouvre_que_tant_de_sessions_et_n_empeche_personne_d_en_ouvrir(
+    app: Starlette, http: httpx2.AsyncClient, horloge: FausseHorloge
+) -> None:
+    for _ in range(SERVEUR.sessions_par_adresse):
+        assert (await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)).status_code == 200
+    de_trop = await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)
+    assert de_trop.status_code == 429
+    assert de_trop.headers["retry-after"] == str(round(SERVEUR.fenetre_des_sessions))
+    # Le protocole 2026-07-28, sans session, passe toujours ; une autre adresse ouvre la sienne ; la fenêtre passée, on rouvre.
+    assert (await http.post("/mcp", json=DECOUVERTE, headers=EN_TETES_DECOUVERTE)).status_code == 200
+    async with depuis(app, "192.0.2.2") as ailleurs:
+        assert (await ailleurs.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)).status_code == 200
+    horloge.heure += SERVEUR.fenetre_des_sessions
     assert (await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)).status_code == 200
 
 

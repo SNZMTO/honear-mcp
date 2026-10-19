@@ -1,7 +1,4 @@
-"""Les réglages du serveur : chaque durée, chaque borne et chaque quota, nommés une fois, lus partout ailleurs.
-
-Les durées sont en secondes.
-"""
+"""Les réglages du serveur : chaque durée (en secondes), chaque borne et chaque quota, nommés une fois, lus partout ailleurs."""
 
 from dataclasses import dataclass
 
@@ -76,8 +73,8 @@ TITRES = ReglagesDesTitres(au_plus=25, longueur_au_plus=200, candidats_au_plus=4
 class ReglagesDuServeur:
     """Le serveur HTTP : où il écoute, quels noms il sert, combien de sessions il tient.
 
-    Les clients d'avant la version 2026-07-28 du protocole ouvrent une session : elles sont bornées, et oubliées après un temps
-    sans nouvelles.
+    Les clients d'avant la version 2026-07-28 du protocole ouvrent une session : bornées au total et par adresse (un seul client
+    prendrait sinon toutes les places, et le SDK refuserait tout le monde), elles s'oublient après un temps sans nouvelles.
     """
 
     hote: str
@@ -89,6 +86,8 @@ class ReglagesDuServeur:
     """Les pages d'où un navigateur peut appeler (l'en-tête Origin)."""
     sessions_au_plus: int
     session_oubliee: float
+    sessions_par_adresse: int
+    fenetre_des_sessions: float
     port_interne: int
     """Le port où Honear lit les listes (`/listes/<id>`) : le frontal ne le relaie pas, il ne sort pas de la machine."""
     requetes_par_adresse: int
@@ -114,7 +113,9 @@ SERVEUR = ReglagesDuServeur(
     hotes=("127.0.0.1:*", "localhost:*", "mcp.honear.fr"),
     origines=("http://127.0.0.1:*", "http://localhost:*"),
     sessions_au_plus=200,
-    session_oubliee=1800,
+    session_oubliee=300,
+    sessions_par_adresse=5,
+    fenetre_des_sessions=600,
     journal_lu_au_plus=16384,
     journal_entete_au_plus=160,
 )
@@ -185,8 +186,7 @@ HONEAR = ReglagesDeHonear(lien_de_liste="https://honear.fr/?liste={id}")
 
 @dataclass(frozen=True)
 class ReglagesDeLAccueil:
-    """La page d'accueil de mcp.honear.fr : où elle est rangée, et ce qu'un navigateur peut y charger (rien que sa feuille de
-    style, reconnue à son empreinte)."""
+    """La page d'accueil de mcp.honear.fr : où elle est rangée, et ce qu'un navigateur peut y charger (sa feuille de style)."""
 
     page: str
     """Son fichier, à côté de ce module."""

@@ -19,3 +19,16 @@ def test_une_adresse_s_oublie_une_fois_sa_fenetre_passee_meme_si_peu_d_adresses_
     horloge.heure += SERVEUR.fenetre_par_adresse
     assert limite.attente("192.0.2.3") == 0
     assert set(limite._comptes) == {"192.0.2.3"}
+
+
+def test_les_sessions_d_une_adresse_s_oublient_meme_si_plus_personne_n_en_ouvre() -> None:
+    # Le serveur ne compte que les requêtes qui ouvrent une session ; toutes les autres font le ménage (`serveurs/public.py`).
+    horloge = FausseHorloge()
+    sessions = ParAdresse(SERVEUR.sessions_par_adresse, SERVEUR.fenetre_des_sessions, SERVEUR.adresses_au_plus, horloge)
+    assert sessions.attente("192.0.2.1") == 0
+    horloge.heure += SERVEUR.fenetre_des_sessions - 1
+    sessions.menage()
+    assert set(sessions._comptes) == {"192.0.2.1"}
+    horloge.heure += 1
+    sessions.menage()
+    assert not sessions._comptes

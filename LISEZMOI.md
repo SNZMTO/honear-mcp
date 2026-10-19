@@ -89,7 +89,7 @@ Chaque couche ne lit que celles du dessous, et `tests/test_sources.py` le vérif
 - `reseau/rangement.py` : les listes sur le disque, écrites d'un coup, oubliées quand leur temps est passé.
 - `reseau/parties.py` : les parties du mini blind test, en mémoire, sous un identifiant que le serveur tire.
 - `reseau/debit.py` : les limites de débit : celle des appels à Deezer (une fenêtre glissante, celle de Honear), celle des
-  requêtes de chaque adresse au MCP.
+  requêtes de chaque adresse au MCP, et des sessions qu'elle ouvre.
 - `reseau/deezer.py` : les appels à Deezer, sous la limite, avec leurs essais, leur file bornée, leur cache, et les pistes
   vues dans les recherches.
 - `outils/titres.py` : l'outil `chercher_titres`.
@@ -100,7 +100,7 @@ Chaque couche ne lit que celles du dessous, et `tests/test_sources.py` le vérif
 - `sources/exploitation.py`, `reseau/exploitation.py`, `outils/exploitation.py`, `serveurs/exploitation.py` : l'assistant
   d'exploitation, de la lecture des réponses de Honear et de GitHub à son serveur en stdio.
 - `serveurs/public.py` : le serveur public, ses deux applications web (`/mcp`, `/` et `/sante` ; `/listes/{id}` pour Honear),
-  la limite par adresse, et son point d'entrée.
+  les limites par adresse (ses requêtes, les sessions qu'elle ouvre), et son point d'entrée.
 - `serveurs/accueil.py` : la route de la page d'accueil, sous sa politique de sécurité du contenu.
 - `serveurs/fenetre.py` : la page de la fenêtre du mini blind test, assemblée au démarrage, et la route de ses polices.
 - `serveurs/journal.py` : une ligne au journal par requête au MCP (la méthode, l'outil, le client et ses capacités), sans
@@ -144,7 +144,9 @@ Et en construisant le socle :
 - **Le journal des requêtes est le nôtre** (`serveurs/journal.py`) : celui d'uvicorn garderait l'adresse IP de chaque client.
   Le nôtre dit ce que demande un client et ce qu'on lui répond, sans adresse ni contenu ; ajouté quand claude.ai a refusé de
   se brancher sans dire pourquoi.
-- **Les anciens clients** (protocole 2025-11-25) ont des sessions : 200 au plus, oubliées après 30 minutes sans nouvelles.
+- **Les anciens clients** (protocole 2025-11-25) ont des sessions : 200 au plus, oubliées après 5 minutes sans nouvelles, et 5
+  au plus par adresse et par 10 minutes (le 19 octobre : à 30 minutes et sans borne par adresse, un seul client prenait toutes
+  les places, et le SDK refusait tout le monde).
 
 Et en écrivant les listes :
 
@@ -211,7 +213,10 @@ Et en préparant la mise en ligne :
 - **La limite par adresse est large** : 120 requêtes par minute. claude.ai et ChatGPT appellent depuis quelques adresses pour
   tous leurs utilisateurs : une borne serrée les couperait tous ensemble. Elle n'arrête qu'un script ; les vraies bornes valent
   pour tout le monde (le budget Deezer et sa file, le nombre de listes). L'adresse est celle que donne le frontal
-  (`X-Forwarded-For`), le seul à joindre ce port ; elle ne sert qu'à compter, en mémoire, une minute.
+  (`X-Forwarded-For`), le seul à joindre ce port ; elle ne sert qu'à compter, en mémoire, le temps de sa fenêtre (une minute),
+  puis s'oublie au ménage suivant (une fois par fenêtre, à la première requête venue). Seule l'ouverture d'une session de
+  l'ancien protocole a une borne serrée, 5 par 10 minutes : les conversations de claude.ai, en 2026-07-28, n'en ouvrent pas ;
+  l'adresse qui en ouvre une reste en mémoire dix minutes, et s'oublie de même.
 - **L'image** : Python 3.13 et uv figés à leur empreinte ; uv installe ce que dit `uv.lock`, puis l'image finale n'a plus que
   Python et l'environnement du serveur, sans uv ni sources. Le conteneur est celui de Honear : lecture seule, aucune capacité,
   aucun port publié, 384 Mo et 128 processus au plus.

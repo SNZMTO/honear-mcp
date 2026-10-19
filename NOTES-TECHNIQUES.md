@@ -154,7 +154,12 @@ l'extension `io.modelcontextprotocol/ui` avec ce type de page. À la fin, la fen
 ## Le protocole
 
 - **Le SDK** : `mcp` 2.3.0, `MCPServer`. Il sert la version 2026-07-28 du protocole (sans session ni poignée de main), et les
-  clients plus anciens (2025-11-25 et avant), qui ouvrent une session : 200 au plus, oubliées après 30 minutes sans nouvelles.
+  clients plus anciens (2025-11-25 et avant), qui ouvrent une session : 200 au plus, oubliées après 5 minutes sans nouvelles.
+  Une adresse en ouvre 5 au plus par 10 minutes (au-delà : 429 et `Retry-After`) : sans cette borne, un seul client prenait
+  les 200 places, et le SDK répondait « Too many open sessions » (503) à tout le monde. Seul compte un POST sans session de
+  l'ancien protocole (un `initialize`), reconnu à ses en-têtes ; le protocole 2026-07-28 n'y compte pas. Le prix : la
+  vérification de claude.ai, à l'ajout du connecteur, est une poignée de main de l'ancien protocole partie des serveurs
+  d'Anthropic (voir « Les journaux ») ; si elle vient toujours de la même adresse, un sixième ajout en dix minutes attend.
 - **Le transport** : Streamable HTTP sur `/mcp`, dans une application Starlette servie par uvicorn. Chaque adresse IP envoie
   120 requêtes par minute au plus (au-delà : 429 et `Retry-After`) ; l'adresse est celle que le frontal donne. Le SDK ne répond qu'aux
   noms qu'on lui donne (l'en-tête `Host` : `mcp.honear.fr`, et la machine elle-même) et refuse une page d'un autre site

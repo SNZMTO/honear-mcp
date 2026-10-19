@@ -99,9 +99,9 @@ protocole dans [`NOTES-TECHNIQUES.md`](NOTES-TECHNIQUES.md), l'hébergement dans
 - **Deezer partagé** : le jeu et le MCP sortent par la même adresse ; leurs deux budgets, vérifiés ensemble, laissent de la
   marge sous la limite de Deezer, avec une file bornée et des recherches gardées.
 - **En production** : une image Python figée à son empreinte, sans droits, en lecture seule, sans capacités ni port publié, une
-  limite par adresse, une page d'accueil sans script sous une CSP stricte, aucune adresse IP écrite (elle ne reste qu'une
-  minute en mémoire, le temps de compter), un registre RGPD
-  ([`RGPD.md`](RGPD.md)).
+  limite par adresse (ses requêtes, et les sessions qu'elle ouvre), une page d'accueil sans script sous une CSP stricte, aucune
+  adresse IP écrite (elle ne reste en mémoire que le temps de compter : une à deux minutes, dix à vingt si elle ouvre une
+  session de l'ancien protocole), un registre RGPD ([`RGPD.md`](RGPD.md)).
 - **Sans compte, et c'est voulu** : le serveur ne garde rien de personne, une liste se partage par un lien qui ne se devine
   pas, et ce qui le protège, ce sont ses bornes. Plein, il oublie la plus vieille liste que personne n'a jouée plutôt que de
   refuser : un script en boucle n'efface que des listes jamais jouées. Une vraie authentification viendra avec des données à
