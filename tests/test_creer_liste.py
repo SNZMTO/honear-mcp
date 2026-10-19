@@ -13,6 +13,13 @@ from tests.faux_deezer import FauxDeezer
 pytestmark = pytest.mark.anyio
 
 
+async def test_l_outil_se_dit_destructeur_plein_il_efface_une_liste_pour_faire_de_la_place(client: Client) -> None:
+    (outil,) = [o for o in (await client.list_tools()).tools if o.name == "creer_liste"]
+    assert outil.annotations is not None
+    assert (outil.annotations.read_only_hint, outil.annotations.destructive_hint) == (False, True)
+    assert "enregistrer une liste peut en effacer une autre" in (outil.description or "")
+
+
 async def test_une_liste_des_pistes_trouvees_se_range_du_plus_connu_au_moins_connu(
     client: Client, faux_deezer: FauxDeezer, rangement: Rangement
 ) -> None:
