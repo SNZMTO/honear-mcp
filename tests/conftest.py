@@ -3,6 +3,7 @@
 import socket
 from collections.abc import AsyncIterator
 from pathlib import Path
+from typing import NoReturn
 
 import httpx2
 import pytest
@@ -15,6 +16,9 @@ from honear_mcp.serveurs.public import creer_le_serveur
 from tests.fausse_horloge import FausseHorloge
 from tests.faux_deezer import FauxDeezer
 
+LA_MACHINE = {"127.0.0.1", "::1"}
+"""Les seules adresses qu'un test peut joindre : la machine elle-même, jamais le réseau."""
+
 
 @pytest.fixture
 def anyio_backend() -> str:
@@ -23,13 +27,26 @@ def anyio_backend() -> str:
 
 @pytest.fixture(autouse=True)
 def reseau_coupe(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Aucun test ne sort de la machine : toute connexion échoue, et le dit."""
+    """Aucun test ne sort de la machine : toute connexion échoue, et le dit, sauf vers la machine elle-même. Sous Windows, la
+    boucle asyncio se parle par une connexion à 127.0.0.1 (le repli de `socket.socketpair`) : sans elle, aucun test asynchrone
+    ne démarrerait."""
+    connecter, connecter_ex = socket.socket.connect, socket.socket.connect_ex
 
-    def refuser(*_: object) -> None:
+    def refuser(*_: object) -> NoReturn:
         raise AssertionError("un test a voulu se connecter au réseau")
 
-    monkeypatch.setattr(socket.socket, "connect", refuser)
-    monkeypatch.setattr(socket.socket, "connect_ex", refuser)
+    def vers_la_machine(sock: socket.socket, adresse: object) -> None:
+        if not (isinstance(adresse, tuple) and adresse[0] in LA_MACHINE):
+            refuser()
+        connecter(sock, adresse)
+
+    def vers_la_machine_ex(sock: socket.socket, adresse: object) -> int:
+        if not (isinstance(adresse, tuple) and adresse[0] in LA_MACHINE):
+            refuser()
+        return connecter_ex(sock, adresse)
+
+    monkeypatch.setattr(socket.socket, "connect", vers_la_machine)
+    monkeypatch.setattr(socket.socket, "connect_ex", vers_la_machine_ex)
     monkeypatch.setattr(socket, "getaddrinfo", refuser)
 
 
