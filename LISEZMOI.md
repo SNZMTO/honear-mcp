@@ -253,10 +253,12 @@ Et après le premier essai dans claude.ai :
 Et en préparant la vitrine :
 
 - **Le dépôt public reçoit le projet d'un bloc** : `publication/publier.sh` prend l'arbre d'un commit poussé dont la CI est
-  verte, vérifie qu'il ne porte ni jeton (classique ou fin), ni clé (privée, d'API), ni jeton porteur, ni fichier `.env`, ni
-  l'adresse IP du VPS (lue dans `~/vps/LISEZMOI.md`, jamais écrite), ni une adresse e-mail inconnue, et passe gitleaks s'il
-  est installé, puis le pose en un seul commit sur le dépôt public. Sans `--envoyer`, il ne fait que vérifier. Les
-  fausses clés des tests s'appellent « faussecle-… » pour qu'il les reconnaisse.
+  verte, vérifie qu'il ne porte ni jeton (classique, fin, JWT), ni clé (privée, d'API), ni jeton porteur, ni mot de passe
+  écrit (en clair ou dans une adresse), ni fichier `.env` ou `.envrc`, ni l'adresse IP du VPS (lue dans `~/vps/LISEZMOI.md`,
+  jamais écrite), ni une adresse e-mail inconnue, et passe gitleaks, puis le pose en un seul commit sur le dépôt public. Sans
+  gitleaks ou sans `~/vps/LISEZMOI.md`, il refuse (le 19 octobre : il passait alors en silence). Sans `--envoyer`, il ne fait
+  que vérifier. Les fausses clés des tests s'appellent « faussecle-… » pour qu'il les reconnaisse : il ne lit ce nom que dans
+  le motif trouvé, pas dans le chemin du fichier.
 - **Les captures de la fenêtre** viennent d'un vrai navigateur (Chromium, dans le conteneur Playwright du VPS), avec un hôte
   d'essai fait de l'`AppBridge` d'`@modelcontextprotocol/ext-apps`, converties en WebP de 1600 pixels de large.
 

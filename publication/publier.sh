@@ -1,9 +1,10 @@
 #!/bin/sh
 # Publie un commit du dépôt privé (SNZMTO/honear-mcp-atelier) dans le dépôt public (SNZMTO/honear-mcp), d'un seul commit :
 # l'arbre de ce commit tel quel, sans son historique. Avant, il vérifie que ce commit est poussé et que sa CI est verte, puis
-# qu'aucun secret ne part : ni jeton, ni clé, ni fichier .env, ni l'adresse IP du VPS (qu'il lit dans ~/vps/LISEZMOI.md, sans
-# jamais l'écrire ni l'afficher), ni une adresse e-mail qu'on ne connaît pas ; et gitleaks, s'il est installé. C'est un filet :
-# des motifs connus, pas une garantie. Sans --envoyer, il ne fait que vérifier.
+# qu'aucun secret ne part : ni jeton, ni clé, ni mot de passe écrit, ni fichier .env ou .envrc, ni l'adresse IP du VPS (qu'il
+# lit dans ~/vps/LISEZMOI.md, sans jamais l'écrire ni l'afficher ; sans ce fichier, il refuse), ni une adresse e-mail qu'on ne
+# connaît pas ; et gitleaks, sans lequel il refuse aussi. C'est un filet : des motifs connus, pas une garantie. Sans --envoyer,
+# il ne fait que vérifier.
 #
 #   sh publication/publier.sh [commit] [--envoyer]
 #   sh publication/publier.sh --verifier <dossier>       (les mêmes vérifications, sur un dossier quelconque)
@@ -18,20 +19,38 @@ git() { command git -C "$RACINE" "$@"; }
 SECRETS='gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY|STATISTIQUES_CLE=["'"'"']?[A-Za-z0-9_-]{8,}'
 SECRETS="$SECRETS"'|sk-[A-Za-z0-9_-]{20,}|sk_(live|test)_[A-Za-z0-9]{16,}|AIza[0-9A-Za-z_-]{35}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]+'
 SECRETS="$SECRETS"'|Bearer [A-Za-z0-9._~+/=-]{20,}'
+# Un jeton JWT, un mot de passe dans une adresse (un nom et un mot de passe avant son « @ »), un mot de passe ou un secret écrit
+# en clair : avec une valeur d'au moins 8 signes qui ne soit ni du code, ni une variable, ni un gabarit (le script de la fenêtre
+# porte, du SDK, « client_secret:l().optional() »). Les motifs s'écrivent de sorte que ce fichier ne se trouve pas lui-même.
+SECRETS="$SECRETS"'|eyJ[A-Za-z0-9_-]+\.eyJ|:[/][/][^:/@[:space:]]+:[^@[:space:]]+@'
+SECRETS="$SECRETS"'|(password|passwd|secret)[[:space:]]*[:=][[:space:]]*["'"'"']?[^[:space:]"'"'"'$({<]{8,}'
 # Les seules adresses e-mail qu'un fichier peut porter.
 ADRESSES_CONNUES='users\.noreply\.github\.com|noreply@anthropic\.com|contact@mateosan\.fr|bonjour@honear\.fr'
+# Où se lit l'adresse IP du VPS : jamais écrite ici.
+VPS="$HOME/vps/LISEZMOI.md"
 
 verifier() {
   dossier="$1"
   echec=0
-  for ip in $(grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' "$HOME/vps/LISEZMOI.md" 2>/dev/null | grep -v '^127\.' | sort -u); do
+  ips="$(grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' "$VPS" 2>/dev/null | grep -v '^127\.' | sort -u || true)"
+  if [ ! -r "$VPS" ]; then
+    echo "Il manque $VPS, où se lit l'adresse IP du VPS : rien ne part sans l'avoir cherchée."
+    echec=1
+  elif [ -z "$ips" ]; then
+    echo "$VPS ne donne aucune adresse IP du VPS : rien ne part sans l'avoir cherchée."
+    echec=1
+  fi
+  for ip in $ips; do
     if grep -rlF -- "$ip" "$dossier" >/dev/null 2>&1; then
       echo "L'adresse IP du VPS est dans : $(grep -rlF -- "$ip" "$dossier" | sed "s#^$dossier/##" | tr '\n' ' ')"
       echec=1
     fi
   done
-  # Les fausses clés des tests s'appellent « faussecle-… » : elles peuvent partir.
-  secrets="$(grep -rnoE -- "$SECRETS" "$dossier" | grep -v 'faussecle-' | cut -d: -f1 | sort -u || true)"
+  # Les fausses clés des tests s'appellent « faussecle-… » : elles peuvent partir. Le filtre ne lit que le motif trouvé, pas le
+  # chemin du fichier ni le reste de sa ligne : un fichier nommé « faussecle-… » ne cache pas un vrai secret.
+  secrets="$(grep -rlE -- "$SECRETS" "$dossier" | while IFS= read -r fichier; do
+    if grep -aoE -- "$SECRETS" "$fichier" | grep -qv 'faussecle-'; then echo "$fichier"; fi
+  done | sort -u || true)"
   if [ -n "$secrets" ]; then
     echo "Un secret est dans : $(echo "$secrets" | sed "s#^$dossier/##" | tr '\n' ' ')"
     echec=1
@@ -41,12 +60,14 @@ verifier() {
     echo "Des adresses e-mail inconnues : $(echo "$inconnues" | tr '\n' ' ')"
     echec=1
   fi
-  envs="$(find "$dossier" \( -name '.env' -o -name '*.env' -o -name '*.env.*' \) -print | sed "s#^$dossier/##" | tr '\n' ' ')"
-  [ -z "$envs" ] || { echo "Un fichier .env part : $envs"; echec=1; }
-  if command -v gitleaks >/dev/null 2>&1; then
-    gitleaks dir "$dossier" --no-banner --redact >/dev/null 2>&1 || { echo "gitleaks voit un secret (gitleaks dir pour le détail)."; echec=1; }
-  else
-    echo "(gitleaks n'est pas installé : seuls les motifs ci-dessus ont été cherchés.)"
+  envs="$(find "$dossier" \( -name '.env' -o -name '*.env' -o -name '*.env.*' -o -name '.envrc' \) -print | sed "s#^$dossier/##" | tr '\n' ' ')"
+  [ -z "$envs" ] || { echo "Un fichier .env ou .envrc part : $envs"; echec=1; }
+  if ! command -v gitleaks >/dev/null 2>&1; then
+    echo "gitleaks n'est pas installé : il est obligatoire, rien ne part sans lui."
+    echec=1
+  elif ! gitleaks dir "$dossier" --no-banner --redact >/dev/null 2>&1; then
+    echo "gitleaks voit un secret (gitleaks dir pour le détail)."
+    echec=1
   fi
   return "$echec"
 }
