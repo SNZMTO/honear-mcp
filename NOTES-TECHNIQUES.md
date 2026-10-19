@@ -185,9 +185,12 @@ playlists choisies, les titres les plus joués et les plus durs. Ce sont des com
 
 ## Les journaux
 
-Le serveur écrit sur sa sortie ce que le SDK et uvicorn disent de leur vie (un démarrage, une session ouverte). Le journal des
-requêtes d'uvicorn est coupé (il garderait l'adresse IP de chaque client), et celui des appels de httpx2 aussi (chaque adresse
-demandée à Deezer porte ce que quelqu'un cherche).
+Le serveur écrit sur sa sortie ce qu'uvicorn dit de sa vie (un démarrage, un arrêt), et les avertissements du SDK (une session
+refusée faute de place). Le journal des requêtes d'uvicorn est coupé (il garderait l'adresse IP de chaque client) ; ceux de
+httpx2 et du SDK n'écrivent que leurs avertissements (`regler_les_journaux`) : chaque adresse demandée à Deezer porte ce que
+quelqu'un cherche, et le SDK écrivait, à INFO, le texte d'un refus (ceux de `creer_liste` citent les titres demandés),
+l'adresse d'une ressource lue (l'identifiant d'une liste) et l'identifiant de chaque session. Reste la trace d'une erreur
+inattendue, qu'il écrit toujours : elle peut citer l'adresse de la ressource en cause.
 
 À la place, le nôtre (`serveurs/journal.py`) écrit une ligne par requête au MCP, c'est-à-dire tout sauf la page d'accueil,
 `/sante` et les polices : la méthode HTTP, le chemin, le code de la réponse, la méthode MCP lue dans le corps (ses 16 premiers

@@ -4,7 +4,8 @@ un client qui n'arrive pas à se brancher, ou qui ne montre pas la fenêtre du m
 Ni adresse IP, ni contenu : la méthode HTTP, le chemin, le code de la réponse, la méthode MCP demandée (`initialize`,
 `tools/list`…), l'outil appelé, le genre de ressource lue (`ui://honear`, `honear://listes`, jamais l'identifiant d'une liste),
 le logiciel qui se présente, ce qu'il dit savoir faire (ses capacités, et pour une extension, ses types MIME), la version du
-protocole, si la requête donne une session, et les en-têtes Origin, Accept et User-Agent.
+protocole, si la requête donne une session, et les en-têtes Origin, Accept et User-Agent. Les journaux des bibliothèques, qui
+garderaient ce contenu, n'écrivent que leurs avertissements (`regler_les_journaux`).
 """
 
 import logging
@@ -17,6 +18,10 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from honear_mcp.ressources.reglages import SERVEUR
 
 JOURNAL = logging.getLogger("honear_mcp.journal")
+BAVARDS = ("httpx2", "mcp")
+"""Les journaux des bibliothèques, qui n'écrivent que leurs avertissements : celui de httpx2 garderait chaque adresse demandée
+à Deezer (ce que quelqu'un cherche) ; celui du SDK, le texte d'un refus (les titres demandés), l'adresse d'une ressource
+(l'identifiant d'une liste) et l'identifiant de chaque session."""
 _JSON: TypeAdapter[JsonValue] = TypeAdapter(JsonValue)
 _METHODE = re.compile(rb'"method"\s*:\s*"([A-Za-z0-9_/.-]{1,64})"')
 _ENTETES = {"origine": "origin", "accepte": "accept", "logiciel": "user-agent", "version": "mcp-protocol-version"}
@@ -76,6 +81,13 @@ def _ce_que_dit_le_corps(corps: bytes) -> dict[str, str]:
         "capacites": _capacites(capacites) if capacites is not None else "-",
     }
     return {cle: _court(valeur) for cle, valeur in dit.items()}
+
+
+def regler_les_journaux() -> None:
+    """Le nôtre écrit chaque requête ; ceux des bibliothèques (`BAVARDS`), que leurs avertissements."""
+    for nom in BAVARDS:
+        logging.getLogger(nom).setLevel(logging.WARNING)
+    JOURNAL.setLevel(logging.INFO)
 
 
 def journaliser(app: ASGIApp) -> ASGIApp:

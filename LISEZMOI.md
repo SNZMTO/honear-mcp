@@ -166,7 +166,9 @@ Et en écrivant les listes :
 - **Lire une liste, pour Honear, c'est la jouer** : elle revit 30 jours. La ressource MCP la montre sans la prolonger.
 - **Le texte nettoyé** : forme NFC, ni caractère de contrôle ni signe de format invisible (dont ceux qui retournent le sens de
   l'écriture), ni lien. Les bornes se comptent avant le nettoyage, et un texte trop long est refusé, pas coupé.
-- **Ni le nom d'une liste ni ce que les gens cherchent ne vont au journal** : celui des appels à Deezer est coupé.
+- **Ni le nom d'une liste ni ce que les gens cherchent ne vont au journal** : celui des appels à Deezer est coupé, et celui du
+  SDK n'écrit que ses avertissements (le 19 octobre : à INFO, il écrivait le texte d'un refus, qui cite les titres demandés,
+  l'identifiant d'une liste lue et celui de chaque session).
 
 Et en portant le jugement de Honear :
 
