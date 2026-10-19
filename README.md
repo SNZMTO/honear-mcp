@@ -111,13 +111,24 @@ protocole dans [`NOTES-TECHNIQUES.md`](NOTES-TECHNIQUES.md), l'hébergement dans
 
 ### Lancer en local
 
-Il faut [uv](https://docs.astral.sh/uv/).
+Il faut [uv](https://docs.astral.sh/uv/), qui installe aussi Python 3.13. Le serveur est fait pour Linux, où il tourne en
+production (dans son conteneur, voir [`HEBERGEMENT.md`](HEBERGEMENT.md)), et macOS. Sous Windows, les tests passent depuis le
+19 octobre 2026, et le serveur démarre pour un essai.
 
 ```sh
 uv sync --frozen
-uv run pytest
+uv run pytest                                     # si le lanceur bute sur un chemin trop long : uv run python -m pytest
 HONEAR_MCP_LISTES=/tmp/listes uv run honear-mcp   # le serveur, sur http://127.0.0.1:8790/mcp
 ```
+
+Ce qui reste propre à POSIX :
+
+- **Le dossier des listes** : par défaut `/var/lib/honear-mcp/listes`, et la ligne ci-dessus s'écrit pour un shell POSIX. Sous
+  Windows, en PowerShell : `$env:HONEAR_MCP_LISTES = "$env:TEMP\listes"; uv run honear-mcp`.
+- **Une liste écrite survit à une coupure** là où le dossier se vide aussi sur le disque (`os.O_DIRECTORY`, sous Linux et
+  macOS). Windows n'ouvre pas un dossier comme un fichier : le rangement y saute ce geste.
+- **Les scripts** de [`deploiement/`](deploiement/) (la mise en ligne, en root, avec Docker) et de
+  [`publication/`](publication/) (`sh`, `gh`, gitleaks, et l'adresse du VPS lue dans `~/vps`) sont faits pour le VPS.
 
 ## Comment je l'ai construit
 
