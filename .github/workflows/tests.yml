@@ -38,7 +38,7 @@ jobs:
         with:
           repository: SNZMTO/honear
           # La version du jeu que le MCP suit : on l'avance quand on republie l'export, pas toute seule.
-          ref: 6513f6b8926da29053dea434394867c71f1148bf
+          ref: 5dc11a25cc242df93fb1427121cee9d26b256fac
           path: honear
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
