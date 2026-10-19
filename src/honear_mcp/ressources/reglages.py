@@ -97,7 +97,7 @@ class ReglagesDuServeur:
     Deezer et des listes, qui valent pour tout le monde."""
     fenetre_par_adresse: float
     adresses_au_plus: int
-    """Combien d'adresses on suit à la fois, en mémoire ; une adresse s'oublie quand sa fenêtre est passée."""
+    """Combien d'adresses on suit à la fois, en mémoire ; sa fenêtre passée, une adresse s'oublie au ménage d'après."""
     journal_lu_au_plus: int
     """Le journal lit au plus ce début du corps d'une requête, pour y trouver la méthode MCP, l'outil et ce que dit le client."""
     journal_entete_au_plus: int
