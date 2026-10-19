@@ -228,7 +228,7 @@ Et en préparant la mise en ligne :
 
 Et après le premier essai dans claude.ai :
 
-- **Sans authentification, et c'est voulu** : le serveur ne connaît personne, ne garde rien de personne et n'appelle aucune
+- **Sans authentification, et c'est voulu** : le serveur ne connaît personne, n'écrit rien de qui l'appelle et n'appelle aucune
   IA payante ; une liste se partage par son lien, qui ne se devine pas. Un OAuth qui accepte tout le monde ne serait qu'un
   décor, avec du code sensible et des jetons en plus. Ce qui protège, ce sont les bornes : la limite par adresse, la part de
   Deezer du MCP, les tailles, le conteneur. Une vraie authentification viendra le jour où le MCP touchera aux données de

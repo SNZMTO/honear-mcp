@@ -6,18 +6,19 @@ Le MCP de Honear se sert sans compte. Il ne demande ni nom, ni e-mail, ni rien d
 
 | Quoi | D'où | Gardé où, combien de temps |
 |---|---|---|
-| Des noms d'artistes et de titres | le modèle du client, par `chercher_titres` | en mémoire, une heure (le cache des recherches), puis oublié ; jamais écrit sur disque |
+| Des noms d'artistes et de titres | le modèle du client, par `chercher_titres`, `creer_liste` ou `jouer_ici` | en mémoire, une heure (le cache des recherches), puis oublié ; jamais écrit sur disque (une liste enregistrée garde ceux de Deezer) |
 | La recherche envoyée à Deezer | le serveur, vers l'API publique de Deezer | chez Deezer, selon ses règles ; elle part de l'adresse du serveur, pas de celle du client |
 | L'adresse IP d'un client | la connexion, par le frontal | en mémoire, pour compter ses requêtes sur une minute (120 au plus), et sur dix les sessions qu'elle ouvre à l'ancien protocole (5 au plus) ; puis oubliée au ménage suivant, fait une fois par fenêtre à la première requête venue ; jamais écrite : le journal du MCP ne la lit pas |
-| Ce que fait un client : la méthode demandée, l'outil appelé, le code de la réponse, son logiciel et ce qu'il dit savoir faire | chaque requête au MCP | le journal du conteneur, que journald fait tourner ; ni adresse ni contenu |
+| Ce que fait un client : la méthode demandée, l'outil appelé, le code de la réponse, son logiciel et ce qu'il dit savoir faire | chaque requête au MCP | le journal du conteneur, que journald fait tourner ; ni adresse ni contenu (seule la trace d'une erreur inattendue du SDK peut citer la ressource ou la session en cause) |
 | Une session d'ancien client | le protocole 2025-11-25 | en mémoire, 5 minutes sans nouvelles au plus ; un identifiant tiré au hasard, rien d'autre, qui ne va pas au journal |
-| Une liste : son nom, ses pistes, leurs surnoms et leurs anecdotes | le modèle du client, par `creer_liste` | un fichier sur le serveur, 30 jours après sa création ou sa dernière partie, puis effacé (plus tôt si le serveur en garde déjà 2 000 et que personne ne l'a jouée) ; rien ne la relie à qui l'a créée |
+| Une liste : son nom, ses pistes, leurs surnoms et leurs anecdotes | le modèle du client, par `creer_liste` | un fichier sur le serveur, 30 jours après sa création ou sa dernière partie, puis effacé (plus tôt si le serveur en garde déjà 2 000 : d'abord celles que personne n'a jouées) ; rien ne la relie à qui l'a créée |
+| Ce qu'on donne à un prompt : l'occasion, les invités, le thème, la playlist à importer | la personne, par son client (`soiree`, `theme`, `importer`) | le temps de l'appel : le serveur en fait le message qu'il rend, et n'en garde rien |
 | Les choix de l'hôte entre des titres ambigus | la personne, par le formulaire de son client | le temps de l'appel ; seul le titre choisi entre dans la liste |
 | Une partie du mini blind test, et ce qu'on y tape | la fenêtre, dans la conversation | en mémoire, une heure après son dernier geste, puis oubliée ; ce qu'on tape peut rester plus longtemps dans le cache du jugement (la ligne suivante) |
 | Les textes jugés : ce qu'on tape dans le mini blind test, les surnoms d'une liste, les noms des pistes | le jugement des saisies | en mémoire, dans les caches du jugement : 4 096 textes au plus chacun, les plus anciens chassés par les nouveaux, tous oubliés au redémarrage ; rien ne les relie à qui les a écrits |
 
-Le thème d'une playlist (« les 30 ans de Léa ») reste dans la conversation, chez le client : le serveur ne reçoit que des
-artistes et des titres.
+Le thème d'une playlist (« les 30 ans de Léa ») reste dans la conversation, chez le client, sauf s'il passe par un prompt (le
+temps de l'appel) ou dans le nom d'une liste : pour chercher, le serveur ne reçoit que des artistes et des titres.
 
 Le nom d'une liste et ses anecdotes sont écrits par le modèle, à la demande de la personne : ils peuvent porter un prénom (« Les
 30 ans de Léa »). Ils ne servent qu'à jouer la liste : quiconque a son lien la voit, comme une playlist partagée, et

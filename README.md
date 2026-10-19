@@ -102,10 +102,10 @@ protocole dans [`NOTES-TECHNIQUES.md`](NOTES-TECHNIQUES.md), l'hébergement dans
   limite par adresse (ses requêtes, et les sessions qu'elle ouvre), une page d'accueil sans script sous une CSP stricte, aucune
   adresse IP écrite (elle ne reste en mémoire que le temps de compter : une à deux minutes, dix à vingt si elle ouvre une
   session de l'ancien protocole), un registre RGPD ([`RGPD.md`](RGPD.md)).
-- **Sans compte, et c'est voulu** : le serveur ne garde rien de personne, une liste se partage par un lien qui ne se devine
-  pas, et ce qui le protège, ce sont ses bornes. Plein, il oublie la plus vieille liste que personne n'a jouée plutôt que de
-  refuser : un script en boucle n'efface que des listes jamais jouées. Une vraie authentification viendra avec des données à
-  protéger.
+- **Sans compte, et c'est voulu** : le serveur ne connaît personne et n'écrit rien de qui l'appelle, une liste se partage par un
+  lien qui ne se devine pas, et ce qui le protège, ce sont ses bornes. Plein, il oublie la plus vieille liste que personne n'a
+  jouée plutôt que de refuser : un script en boucle n'efface que des listes jamais jouées. Une vraie authentification viendra
+  avec des données à protéger.
 - **Et pour moi seul** : un second serveur, en stdio sur le VPS, qui lit l'état des sites, leurs statistiques, leurs certificats
   et leur CI, et répond à « je peux déployer là ? ». Il n'écrit rien.
 
