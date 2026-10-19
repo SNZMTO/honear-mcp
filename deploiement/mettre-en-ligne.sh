@@ -7,6 +7,8 @@
 #
 #   sudo sh deploiement/mettre-en-ligne.sh [--maintenant]
 #
+# Avec sudo, depuis le compte à qui est la copie : il refuse root lui-même, car git la lit au nom de ce compte.
+#
 # Revenir à la version d'avant sans reconstruire : changer VERSION dans /srv/honear-mcp/.env (les trois dernières images sont
 # gardées : sudo docker image ls honear-mcp), puis sudo docker compose --project-directory /srv/honear-mcp up -d
 set -eu
@@ -14,8 +16,12 @@ RACINE="$(cd "$(dirname "$0")/.." && pwd)"
 CIBLE=/srv/honear-mcp
 DOMAINE=mcp.honear.fr
 [ "$(id -u)" = 0 ] || { echo "Lance-le avec sudo."; exit 1; }
+QUI="${SUDO_USER:-}"
+[ -n "$QUI" ] && [ "$QUI" != root ] || { echo "Lance-le avec sudo, depuis ton compte : git lit la copie à ton nom."; exit 1; }
 command -v docker >/dev/null || { echo "Docker n'est pas là : prépare d'abord le VPS (dépôt « vps », sudo sh preparer.sh)."; exit 1; }
-git() { command git -c safe.directory="$RACINE" -C "$RACINE" "$@"; }
+# git lit la copie au nom de qui l'a lancé, jamais en root : un réglage de la copie qui lance une commande (core.fsmonitor…)
+# ne tourne qu'avec ses droits à lui (la classe de CVE-2022-24765).
+git() { sudo -H -u "$QUI" git -C "$RACINE" "$@"; }
 
 if [ -n "$(git status --porcelain)" ]; then
   echo "Le dépôt a des changements qui ne sont pas commités : commite-les d'abord."
