@@ -2,18 +2,21 @@
 Honear."""
 
 import logging
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Iterator
 from importlib.metadata import version
 
 import httpx2
 import pytest
+from mcp import Client, MCPError
 
 from honear_mcp.regles.liste import Liste, PisteDeLaListe, Surnoms
 from honear_mcp.reseau.deezer import Deezer
 from honear_mcp.reseau.parties import Parties
 from honear_mcp.reseau.rangement import Rangement
 from honear_mcp.ressources.reglages import LISTES, SERVEUR
+from honear_mcp.serveurs.journal import BAVARDS, JOURNAL, regler_les_journaux
 from honear_mcp.serveurs.public import application, application_interne
+from tests.demandes import INCONNU, refus
 from tests.fausse_horloge import FausseHorloge
 
 pytestmark = pytest.mark.anyio
@@ -81,6 +84,33 @@ async def test_le_journal_dit_ce_que_fait_un_client_sans_garder_son_adresse(
     assert "SECRET1234" not in ressource
     assert "chemin='/.well-known/oauth-protected-resource/mcp' code='404' mcp='-' session='non'" in decouverte
     assert "127.0.0.1" not in initialisation + ressource + decouverte
+
+
+@pytest.fixture
+def journaux_du_serveur() -> Iterator[None]:
+    """Les journaux réglés comme au démarrage du serveur (`regler_les_journaux`), puis rendus tels qu'ils étaient."""
+    journaux = [logging.getLogger(nom) for nom in (*BAVARDS, JOURNAL.name)]
+    niveaux = [journal.level for journal in journaux]
+    regler_les_journaux()
+    yield
+    for journal, niveau in zip(journaux, niveaux, strict=True):
+        journal.setLevel(niveau)
+
+
+@pytest.mark.usefixtures("journaux_du_serveur")
+async def test_aucun_journal_ne_garde_ce_qu_on_demande_ni_une_liste_ni_une_session(
+    client: Client, http: httpx2.AsyncClient, caplog: pytest.LogCaptureFixture
+) -> None:
+    with caplog.at_level(logging.DEBUG):
+        texte = await refus(client, [INCONNU] * LISTES.pistes_au_moins)
+        with pytest.raises(MCPError):
+            await client.read_resource("honear://listes/SECRET1234")
+        session = (await http.post("/mcp", json=INITIALISATION, headers=EN_TETES_MCP)).headers["mcp-session-id"]
+    # Le refus cite les titres demandés, et notre journal écrit toujours ; mais aucun journal ne garde l'un ou l'autre.
+    assert "Zqxwv Plughxyz — Vwqzk Trlmpf : introuvable" in texte
+    assert any(r.name == JOURNAL.name for r in caplog.records)
+    for garde in ("Zqxwv", "Vwqzk", "30 ans de Léa", "SECRET1234", session):
+        assert garde not in caplog.text
 
 
 async def test_le_mcp_refuse_un_autre_nom_ou_une_page_d_ailleurs(http: httpx2.AsyncClient) -> None:

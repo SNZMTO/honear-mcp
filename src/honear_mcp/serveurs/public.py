@@ -6,7 +6,6 @@ deux ; un client MCP se branche alors sur http://127.0.0.1:8790/mcp. Deux variab
 réglages : HONEAR_MCP_LISTES, le dossier des listes, et HONEAR_MCP_HOTE, où l'on écoute (0.0.0.0 dans le conteneur).
 """
 
-import logging
 import math
 import os
 from collections.abc import AsyncIterator
@@ -41,7 +40,7 @@ from honear_mcp.ressources.reglages import DEEZER, LISTES, SERVEUR
 from honear_mcp.ressources.textes import TEXTES
 from honear_mcp.serveurs.accueil import page_d_accueil
 from honear_mcp.serveurs.fenetre import page_du_mini, polices
-from honear_mcp.serveurs.journal import JOURNAL, journaliser
+from honear_mcp.serveurs.journal import journaliser, regler_les_journaux
 
 
 def creer_le_serveur(deezer: Deezer, rangement: Rangement, parties: Parties) -> MCPServer:
@@ -133,9 +132,8 @@ def application_interne(rangement: Rangement) -> Starlette:
 
 async def _servir() -> None:
     # Ni le journal des requêtes d'uvicorn, qui garderait l'adresse IP de chaque client (le nôtre, `journal.py`, ne la lit pas),
-    # ni celui des appels à Deezer, qui garderait ce que les gens cherchent.
-    logging.getLogger("httpx2").setLevel(logging.WARNING)
-    JOURNAL.setLevel(logging.INFO)
+    # ni ceux des appels à Deezer et du SDK, qui garderaient ce que les gens cherchent, leurs listes et leurs sessions.
+    regler_les_journaux()
     horloge = HorlogeDuSysteme()
     rangement = Rangement(Path(os.environ.get("HONEAR_MCP_LISTES", LISTES.dossier)), horloge)
     rangement.oublier_les_vieilles()
