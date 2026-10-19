@@ -2,9 +2,15 @@
 dernier geste ; tant au plus à la fois. Plein, le serveur oublie la plus vieille partie que personne n'a jouée, comme pour
 les listes : un script qui en ouvre en boucle ne chasse que des parties jamais jouées. Le protocole n'a plus de session : c'est
 cet identifiant, passé à chaque outil de la fenêtre, qui tient la partie d'un appel à l'autre.
+
+Une saisie se juge dans un fil à part, quelques-unes à la fois : son calcul ne fige ni la boucle ni les autres parties.
 """
 
-from honear_mcp.regles.mini import PartieDuMini
+import anyio
+from anyio import to_thread
+
+from honear_mcp.regles.jugement import Verdict
+from honear_mcp.regles.mini import PartieDuMini, juger_la_saisie
 from honear_mcp.reseau.hasard import identifiant
 from honear_mcp.reseau.horloge import Horloge
 from honear_mcp.ressources.reglages_du_mini import MINI
@@ -18,6 +24,13 @@ class Parties:
         self._horloge = horloge
         self._parties: dict[str, tuple[float, PartieDuMini, bool]] = {}
         """Chaque partie : jusqu'à quand elle vit, où elle en est, et si quelqu'un y a déjà fait un geste."""
+        self._juges = anyio.CapacityLimiter(MINI.jugements_a_la_fois)
+        """Les fils où se jugent les saisies, tant au plus à la fois."""
+
+    async def juger(self, partie: PartieDuMini, saisie: str) -> tuple[PartieDuMini, Verdict]:
+        """La partie après une saisie sur sa piste en cours, et le verdict de cette saisie : jugée dans un fil à part. Rien
+        n'est gardé : c'est à qui juge de voir si la partie a bougé entre-temps."""
+        return await to_thread.run_sync(juger_la_saisie, partie, saisie, limiter=self._juges)
 
     @property
     def en_cours(self) -> int:

@@ -63,7 +63,7 @@ def ajouter_le_mini(apps: Apps, mini: MiniBlindTest, page: str) -> None:
     async def mini_repondre(
         partie: str, saisie: Annotated[str, StringConstraints(max_length=JUGEMENT.saisie_au_plus)], ctx: Context
     ) -> Jugee:
-        return mini.repondre(partie, saisie, ctx)
+        return await mini.repondre(partie, saisie, ctx)
 
     @apps.tool(
         resource_uri=MINI.fenetre,

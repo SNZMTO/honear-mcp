@@ -87,7 +87,8 @@ Chaque couche ne lit que celles du dessous, et `tests/test_sources.py` le vérif
 - `reseau/horloge.py` : la seule horloge, celle qui mesure et celle qui date.
 - `reseau/hasard.py` : le seul tirage, celui des identifiants de liste.
 - `reseau/rangement.py` : les listes sur le disque, écrites d'un coup, oubliées quand leur temps est passé.
-- `reseau/parties.py` : les parties du mini blind test, en mémoire, sous un identifiant que le serveur tire.
+- `reseau/parties.py` : les parties du mini blind test, en mémoire, sous un identifiant que le serveur tire, et le jugement
+  d'une saisie, dans un fil à part.
 - `reseau/debit.py` : les limites de débit : celle des appels à Deezer (une fenêtre glissante, celle de Honear), celle des
   requêtes de chaque adresse au MCP, et des sessions qu'elle ouvre.
 - `reseau/deezer.py` : les appels à Deezer, sous la limite, avec leurs essais, leur file bornée, leur cache, et les pistes
@@ -244,8 +245,10 @@ Et après le premier essai dans claude.ai :
 - **Une saisie ne fige plus le serveur** (le 16) : comme dans Honear, seuls les premiers mots d'une saisie se découpent
   (`JUGEMENT.mots_au_plus`), la fenêtre refuse une saisie plus longue que celle du jeu (`saisie_au_plus`), deux longueurs trop
   éloignées ne comptent plus leurs fautes (`_fautes_au_plus`, sans changer aucun verdict), et un texte ne se normalise qu'une
-  fois (`TEXTES_JUGES_EN_MEMOIRE`). Deux cent caractères piégés coûtaient près de dix secondes ; la pire saisie, quelques
-  dizaines de millisecondes.
+  fois (`TEXTES_JUGES_EN_MEMOIRE`). Deux cents caractères piégés coûtaient près de dix secondes. La pire saisie trouvée depuis
+  (« & » séparés d'espaces, contre un titre réel de 150 signes) coûte encore de 70 à 110 millisecondes sur un PC de bureau,
+  et environ 260 selon l'audit du 19 octobre : depuis, une saisie se juge dans un fil à part, 4 à la fois
+  (`MINI.jugements_a_la_fois`), et la boucle sert les autres requêtes pendant ce temps.
 
 Et en préparant la vitrine :
 
