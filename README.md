@@ -17,6 +17,7 @@
 > duplicate), stores the list for the game, and runs a mini blind test as an MCP App whose answers never reach the model. It
 > calls no AI itself. Python 3.13, strict typing, an architecture enforced by its own tests, a judge ported from the game and
 > checked against a table the game generates, a hardened Docker deployment and a GDPR register. Code and docs are in French.
+> Full English version: [README.en.md](README.en.md).
 
 ## Une playlist qui n'existe nulle part
 
