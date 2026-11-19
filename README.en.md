@@ -137,7 +137,7 @@ phase in real clients.
 - **One phase at a time**, each finished by its tests and a trial in a real client: MCP Inspector against the real Deezer, and
   a real browser for the window, in a test host, then claude.ai.
 - **Written instructions** ([`CLAUDE.md`](CLAUDE.md)): the commands, the deployment, and what must never be touched.
-- **The history.** The work is done in small commits, co-signed by Claude, in a private repository. This public repository
+- **The history.** The work is done in small commits, in a private repository. This public repository
   receives its tree in one block at each milestone ([`publication/publier.sh`](publication/publier.sh), which refuses to
   publish if it finds a secret pattern, a `.env` or `.envrc` file, the VPS's IP address or an unknown e-mail address, or if
   gitleaks is missing: a safety net, not a guarantee): hence a history made of publications, not of commits.

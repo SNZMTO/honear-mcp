@@ -106,8 +106,6 @@ Le MCP de Honear, publié le $(date -u +%d/%m/%Y)
 
 Publié d'un bloc depuis le dépôt privé où le travail se fait, par petits commits (voir « L'historique », dans le README) : son
 commit $COURT.
-
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 MESSAGE
 command git -C "$TRAVAIL/public" push -q origin HEAD:main
 echo "Publié : https://github.com/$PUBLIC"

@@ -144,7 +144,7 @@ chaque phase dans de vrais clients.
 - **Une phase à la fois**, chacune finie par ses tests et un essai dans un vrai client : MCP Inspector contre le vrai Deezer, et
   un vrai navigateur pour la fenêtre, dans un hôte d'essai, puis claude.ai.
 - **Des consignes écrites** ([`CLAUDE.md`](CLAUDE.md)) : les commandes, la mise en ligne, et ce à quoi on ne touche jamais.
-- **L'historique.** Le travail se fait par petits commits, co-signés par Claude, dans un dépôt privé. Ce dépôt public en
+- **L'historique.** Le travail se fait par petits commits, dans un dépôt privé. Ce dépôt public en
   reçoit l'arbre d'un bloc à chaque jalon ([`publication/publier.sh`](publication/publier.sh), qui refuse de publier si un
   motif de secret, un fichier `.env` ou `.envrc`, l'adresse IP du VPS ou une adresse e-mail inconnue s'y trouve, ou si gitleaks
   manque : un filet, pas une garantie) : d'où un historique fait de publications, et non de commits.
